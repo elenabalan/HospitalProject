@@ -6,35 +6,34 @@ using System.Web;
 
 namespace Domain
 {
-    public class Patient : Person, IPersonInOutHospital,IComparable<Patient>
+    
+    public class Patient : Person, IPersonInOutHospital, IComparable<Patient>
     {
+        private static int countPacient = 0;
         #region FILDS AND PROPERTIES
 
-        Doctor DoctorResponsible ;
+     //   public int IdPacient { get; set; }
+        Doctor DoctorResponsible;
+        public DateTime DateIn { get; set; }
 
+        public DateTime? DateOut { get; set;}
 
-        public DateTime DateIn
-        {
-            get; set;
-        }
-
-        public DateTime? DateOut
-        {
-            get; set;
-        }
-
-        public static IComparer<Patient > SortByFullName
+        List<SicknessHistory> SickHistories;
+        #region Static Properties for Sorting
+        public static IComparer<Patient> SortByFullName
         {
             get { return (IComparer<Patient>)new NameComparer(); }
         }
-        public static IComparer<Patient > SortByDateIn
+        public static IComparer<Patient> SortByDateIn
         {
             get { return new DateInComparer(); }
         }
         #endregion
+        #endregion
         #region CONSTRUCTORS
-        public Patient(string name,string surname,Gender g,DateTime birthD,string adress, string phone,DateTime dIn)
+        public Patient(string name, string surname, Gender g, DateTime birthD, string adress, string phone, DateTime dIn)
         {
+  //          IdPacient = countPacient++;
             Name = name;
             Surname = surname;
             Gender = g;
@@ -45,6 +44,7 @@ namespace Domain
             //DateIn = DateTime.Today;
             DateIn = dIn;
             DateOut = null;
+            SickHistories = new List<SicknessHistory>();
         }
         #endregion
         #region METHODS
@@ -65,9 +65,9 @@ namespace Domain
         public override string ToString()
         {
             //return $"{Name} {Surname}  Data internarii {DateIn .ToShortDateString ()} Doctor {DoctorResponsible.Name} {DoctorResponsible .Surname}";
-            return $"{Name} {Surname}  Data internarii {DateIn.Day}.{DateIn .Month,2 }.{DateIn .Year} Doctor {DoctorResponsible.Name} {DoctorResponsible.Surname}";
+            return $"{Name} {Surname}  Data internarii {DateIn.Day}.{DateIn.Month,2 }.{DateIn.Year} Doctor {DoctorResponsible.Name} {DoctorResponsible.Surname}";
         }
-        
+
         public void AssignDoctor(Doctor doc)
         {
             DoctorResponsible = doc;
@@ -76,7 +76,7 @@ namespace Domain
                 throw (new ArgumentNullException());
             (doc.listPatients).Add(p);
         }
-        
+
         public int CompareTo(Patient other)
         {
             //Patient pTmp = (Patient)other;
@@ -85,9 +85,15 @@ namespace Domain
             string fullNameObj = other.Name + " " + other.Surname;
             return fullNameThis.CompareTo(fullNameObj);
         }
-
-
-
+        public void Externarea(DateTime dExtrn)
+        {
+            DateOut = dExtrn;
+        }
+        public void AddSickHistory(SicknessHistory sh)
+        {
+            SickHistories.Add(sh);
+        }
+        
         #endregion
     }
 }
