@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Domain;
@@ -9,6 +10,10 @@ namespace TempHospitalApplication
 {
     class Program
     {
+        //???????????????????????
+        delegate Func<int,int,int,string,int> FunctieConcrete(int i, string s);
+
+
         static void Main(string[] args)
         {
             Console.WriteLine("Doctori");
@@ -69,21 +74,32 @@ namespace TempHospitalApplication
             };
             Console.WriteLine("************************");
 
-            Console.WriteLine($"Print all SicknessHistories for patient {patients.ElementAt(1)}");
-            foreach (Patient pat in patients)
+
+            //Console.WriteLine($"Print all SicknessHistories for patient {patients.ElementAt(1)}");
+            Console.WriteLine($"Print all SicknessHistories for patients in the hole hospital");
+            foreach (Patient pat in patients.Distinct())
             {
-
-
-                var result = sicknessHistories.Where(x => x.IdPatient.Name  == pat.Name).Select(x => x.ToString());
-
-                Console.WriteLine(pat.Name + "probolel:");
-
+                var result = sicknessHistories.Where(x => (x.IdPatient.Name  == pat.Name)&&(x.IdPatient.Surname == pat.Surname )).Select(x => x.ToString());
+                    Console.WriteLine(pat.Name +"  "+ pat.Surname + "   probolel:");
+                
                 foreach (var rez in result)
                 {
                     Console.WriteLine(rez);
                 }
 
             }
+
+            //Console.WriteLine($"Print all SicknessHistories for patient {patients.ElementAt(1)}");
+            Console.WriteLine($"\n\nPrint all SicknessHistories for patients {patients.ElementAt(1)}");
+             var result1 = sicknessHistories.Where(x => (x.IdPatient.Name == patients.ElementAt(1).Name) && (x.IdPatient.Surname == patients.ElementAt(1).Surname)).Select(x => x.ToString());
+                Console.WriteLine(patients.ElementAt(1).Name + "  " + patients.ElementAt(1).Surname + "   probolel:");
+
+                foreach (var rez in result1)
+                {
+                    Console.WriteLine(rez);
+                }
+
+            
             Console.WriteLine("************************");
             //-------------------------------
             Console.ReadKey();
