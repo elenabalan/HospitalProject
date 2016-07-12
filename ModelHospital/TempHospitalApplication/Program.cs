@@ -1,24 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Domain;
+using Utils;
 
 namespace TempHospitalApplication
 {
+    delegate SicknessHistory StartSicknessHandler<Patient, NewStartSicknessEventArgs>(Patient p, NewStartSicknessEventArgs a);
     class Program
     {
-        //???????????????????????
-        delegate Func<int,int,int,string,int> FunctieConcrete(int i, string s);
-
-
         static void Main(string[] args)
         {
             Console.WriteLine("Doctori");
-            List<Doctor> doct = new List<Doctor> { new Doctor("Bordea", "Boris", Gender.M, new DateTime(1958, 1, 1),"Stefan cel mare 2","123456987", TipDoctor.CHIRURG),
-                                    new Doctor("Albu", "Ana", Gender.F, new DateTime(1965, 5, 9), "Aleco Russo 3", "77755566", TipDoctor.THERAPIST) };
+            List<Doctor> doct = new List<Doctor> { new Doctor("Bordea", "Boris", Gender.M,"Stefan cel mare 2","123456987", TipDoctor.CHIRURG),
+                                    new Doctor("Albu", "Ana", Gender.F, "Aleco Russo 3", "77755566", TipDoctor.THERAPIST, new DateTime(1965, 5, 9) )};
             Console.WriteLine(doct[0].ToString());
             Console.WriteLine(doct[1].ToString());
 
@@ -37,18 +37,15 @@ namespace TempHospitalApplication
             patients.ElementAt(2).AssignDoctor(doct[0]);
 
             patients.ElementAt(1).Externarea(new DateTime(2019, 6, 20));
-            //Console.WriteLine(pacient1.ToString());
-            //Console.WriteLine(pacient2.ToString());
-            //Console.WriteLine(pacient3.ToString());
 
             doct[1].ViewPatients();
             Console.WriteLine("************************");
             doct[1].PatientsExtern(new DateTime(2016, 6, 25));
             Console.WriteLine("************************");
-            doct[0].listPatients.Sort(Patient.SortByFullName);
+            doct[0].ListPatients.Sort(Patient.SortByFullName);
             doct[0].ViewPatients();
 
-            doct[0].listPatients.Sort(Patient.SortByDateIn);
+            doct[0].ListPatients.Sort(Patient.SortByDateIn);
             doct[0].ViewPatients();
 
             Console.WriteLine();
@@ -64,44 +61,35 @@ namespace TempHospitalApplication
 
             //-------------------------------
             List<string> realSymptomsList = new List<string> { "DurCap", "Voma", "Tensiune", "DurBurta", "Anemie", "Convulsii", "Fiebra39+", "Ferba38+", "Fiebra37+" };
-            SicknessHistory[] sicknessHistories = new SicknessHistory[]
+            List<SicknessHistory> sicknessHistories = new List<SicknessHistory>
             {
-                new SicknessHistory( patients.ElementAt(0), doct .ElementAt(0), "Angina", SicknessStatusEnum.ACTIV),
-                new SicknessHistory( patients.ElementAt(1), doct .ElementAt(0), "Hipertensiune", SicknessStatusEnum.CHRONIC),
-                new SicknessHistory( patients.ElementAt(2), doct .ElementAt(1), "Otita", SicknessStatusEnum.ACTIV ),
-                new SicknessHistory( patients.ElementAt(2), doct .ElementAt(1), "Gastrita", SicknessStatusEnum.CHRONIC),
-                new SicknessHistory( patients.ElementAt(1), doct .ElementAt(1), "InfGastr", SicknessStatusEnum.OFF)
+                new SicknessHistory( "Angina", SicknessStateEnum.ACTIV,patients.ElementAt(0), doct .ElementAt(0)),
+                new SicknessHistory( "Hipertensiune", SicknessStateEnum.CHRONIC,patients.ElementAt(1), doct .ElementAt(0), new DateTime( 2014,04,23)),
+                new SicknessHistory( "Otita", SicknessStateEnum.ACTIV, patients.ElementAt(2), doct .ElementAt(1), new DateTime( 2016,03,30)),
+                new SicknessHistory( "Gastrita", SicknessStateEnum.CHRONIC,patients.ElementAt(2), doct .ElementAt(1), new DateTime( 2015,11,07)),
+                new SicknessHistory( "InfGastr", SicknessStateEnum.OFF,patients.ElementAt(1), doct .ElementAt(1), new DateTime( 2016,01,20))
             };
             Console.WriteLine("************************");
 
 
-            //Console.WriteLine($"Print all SicknessHistories for patient {patients.ElementAt(1)}");
-            Console.WriteLine($"Print all SicknessHistories for patients in the hole hospital");
-            foreach (Patient pat in patients.Distinct())
-            {
-                var result = sicknessHistories.Where(x => (x.IdPatient.Name  == pat.Name)&&(x.IdPatient.Surname == pat.Surname )).Select(x => x.ToString());
-                    Console.WriteLine(pat.Name +"  "+ pat.Surname + "   probolel:");
-                
-                foreach (var rez in result)
-                {
-                    Console.WriteLine(rez);
-                }
+            Utils.Utils.PrintAllSicknessHistories(patients, sicknessHistories);
 
-            }
+            Utils.Utils.PrintAllSicknessHistoriesForAPacient(patients.ElementAt(1), sicknessHistories);
+            Console.WriteLine("**************  EVENTS  **************");
 
-            //Console.WriteLine($"Print all SicknessHistories for patient {patients.ElementAt(1)}");
-            Console.WriteLine($"\n\nPrint all SicknessHistories for patients {patients.ElementAt(1)}");
-             var result1 = sicknessHistories.Where(x => (x.IdPatient.Name == patients.ElementAt(1).Name) && (x.IdPatient.Surname == patients.ElementAt(1).Surname)).Select(x => x.ToString());
-                Console.WriteLine(patients.ElementAt(1).Name + "  " + patients.ElementAt(1).Surname + "   probolel:");
+            //Apare event DoctorQuit
+           // Utils.Utils.PreluareaPacientilor(doct[0], new DateTime(2016, 07, 12), doct[1], sicknessHistories);
 
-                foreach (var rez in result1)
-                {
-                    Console.WriteLine(rez);
-                }
-
-            
+            Console.WriteLine("Doctori");
+            Console.WriteLine(doct[0].ToString());
+            Console.WriteLine(doct[1].ToString());
             Console.WriteLine("************************");
             //-------------------------------
+
+            Utils.Utils.SicknessHistoryToTXTFile(sicknessHistories[0]);
+            Utils.Utils.SicknessHistoryToTXTFile(sicknessHistories[1]);
+
+            Utils.Utils.AllSicknessHistoryToTXTFile(sicknessHistories);
             Console.ReadKey();
         }
     }

@@ -1,0 +1,6 @@
+Pacient Pupkin Vasea
+Sickness name is Angina
+Starea maladiei ACTIV
+Data internarii 7/12/2016 12:19:27 PM
+Data externarii 
+Doctor Bordea Boris

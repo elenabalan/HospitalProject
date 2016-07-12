@@ -1,51 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace Domain
 {
-    public enum SicknessStatusEnum { ACTIV,CHRONIC,OFF}
     public class SicknessHistory
     {
-       // public int IdPatient { get; set; }
-      //  public int IdDoctor { get; set; }
-        public Patient IdPatient;
-        public Doctor IdDoctor;
-        public string NameSickness { get; set; }
-     //   List<string> symptoms;
-        SicknessStatusEnum sicknessStatus;
-        List<string> Prescription;
+        public string NameSickness { get; }
+        public SicknessStateEnum SicknessState { get; set; }
+        public Patient Pat { get; }
+        public Doctor Doc { get; set; }
+        public DateTime DateStart { get; } = DateTime.Now;
+        public DateTime? DateFinish { get; set; } = null;
 
-        public SicknessHistory (Patient idp,Doctor idd,string ns,SicknessStatusEnum sStatus)
+        public static WeakDoctorQuitHandler QuitDocHandler = new WeakDoctorQuitHandler();
+        public SicknessHistory(string nameSickness, SicknessStateEnum sicknessState, Patient pacient, Doctor doctor, DateTime? dateStart = null)
         {
-            IdPatient = idp;
-            IdDoctor = idd;
-            NameSickness = ns;
-            sicknessStatus = sStatus;
-            Prescription = new List<string>();
-     //       symptoms = new List<string> (); //includes only short name of symptoms 
+
+            if (dateStart != null) DateStart = (DateTime)dateStart;
+            Pat = pacient;
+            Doc = doctor;
+            NameSickness = nameSickness;
+            SicknessState = sicknessState;
+
+            QuitDocHandler.QuitDoc += ChangeDoctors;
+        }
+        public void CloseSicknessHistory(DateTime dateClose)
+        {
+            DateFinish = dateClose;
+            SicknessState = SicknessStateEnum.OFF;
         }
 
-        public void AddPrescription(string newPrescr)
+        public void ChangeDoctors(NewDoctorQuitArgs args)
         {
-            Prescription.Add(newPrescr);
+            if (Doc == args .QuitDoctor)
+                Doc = args .NewDoctor;
         }
-        //public void AddSymptom (string sym)
-        //{
-        //    symptoms.Add(sym);
-        //}
 
-        public override string ToString()
-        {
-            var rez = $"Id doctor = {IdDoctor.ToString()}  {NameSickness}  ";
-            //foreach (var sym in symptoms)
-            //{
-            //    rez += $"\n {sym} ";
-            //}
-            rez += $"\n At the moment the sickness is {sicknessStatus}\n";
-            return rez;
-        }
+        public override string ToString() => $"Doctor  {Doc}  {NameSickness} \n At the moment the sickness is {SicknessState}\n Start sickness date is {DateStart :d}\n Finish sickness date is {DateFinish :d}";
+       
     }
 }

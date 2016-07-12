@@ -7,15 +7,9 @@ namespace Domain
 {
     public abstract class Staff : Person, IPersonInOutHospital
     {
-        public DateTime DateIn
-        {
-            get; set;
-        }
+        public DateTime DateIn{get; set;}
 
-        public DateTime? DateOut
-        {
-            get; set;
-        }
+        public DateTime? DateOut { get; set; } = null;
 
         internal Department department { get; set; }
         public abstract void DoWork();

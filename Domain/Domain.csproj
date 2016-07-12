@@ -43,17 +43,23 @@
     <Compile Include="DateInComparer.cs" />
     <Compile Include="Department.cs" />
     <Compile Include="Doctor.cs" />
+    <Compile Include="EventFinishSicknessHandler.cs" />
     <Compile Include="Hospital.cs" />
     <Compile Include="IPersonInOutHospital.cs" />
     <Compile Include="NameComparer.cs" />
+    <Compile Include="NewDoctorQuitArgs.cs" />
+    <Compile Include="NewSicknessHistoryArgs.cs" />
     <Compile Include="OperatingStaff.cs" />
     <Compile Include="Patient.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sickness.cs" />
     <Compile Include="SicknessHistory.cs" />
+    <Compile Include="SicknessStateEnum.cs" />
     <Compile Include="Staff.cs" />
     <Compile Include="Symptom.cs" />
+    <Compile Include="TipDoctor.cs" />
+    <Compile Include="WeakDoctorQuitHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

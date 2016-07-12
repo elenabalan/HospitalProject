@@ -6,9 +6,10 @@ using System.Web;
 
 namespace Domain
 {
-    
+    delegate void FinishSicknessHandler(DateTime d);
     public class Patient : Person, IPersonInOutHospital, IComparable<Patient>
     {
+        
         private static int countPacient = 0;
         #region FILDS AND PROPERTIES
 
@@ -74,7 +75,7 @@ namespace Domain
             Patient p = this;
             if (p == null)
                 throw (new ArgumentNullException());
-            (doc.listPatients).Add(p);
+            (doc.ListPatients).Add(p);
         }
 
         public int CompareTo(Patient other)
@@ -93,7 +94,13 @@ namespace Domain
         {
             SickHistories.Add(sh);
         }
-        
+        //public SicknessHistory CreateNewSicknessHistory(Person p, NewSicknessEventArgs arg)
+        //{
+
+        //    var temp = new SicknessHistory(arg.NameSickness, arg.State, p, arg.StartDate);
+        //    EventFinishSickHandler.EventFinishSick += temp.CloseSicknessHistory;
+        //    return temp;
+        //}
         #endregion
     }
 }

@@ -1,0 +1,30 @@
+Doctor  
+Bordea Boris CHIRURG birthDay is in 7/12/1981 
+Comes in hospital in 1/1/0001 Leave the hospital in   Angina 
+ At the moment the sickness is ACTIV
+ Start sickness date is 7/12/2016
+ Finish sickness date is 
+Doctor  
+Bordea Boris CHIRURG birthDay is in 7/12/1981 
+Comes in hospital in 1/1/0001 Leave the hospital in   Hipertensiune 
+ At the moment the sickness is CHRONIC
+ Start sickness date is 4/23/2014
+ Finish sickness date is 
+Doctor  
+Albu Ana THERAPIST birthDay is in 5/9/1965 
+Comes in hospital in 1/1/0001 Leave the hospital in   Otita 
+ At the moment the sickness is ACTIV
+ Start sickness date is 3/30/2016
+ Finish sickness date is 
+Doctor  
+Albu Ana THERAPIST birthDay is in 5/9/1965 
+Comes in hospital in 1/1/0001 Leave the hospital in   Gastrita 
+ At the moment the sickness is CHRONIC
+ Start sickness date is 11/7/2015
+ Finish sickness date is 
+Doctor  
+Albu Ana THERAPIST birthDay is in 5/9/1965 
+Comes in hospital in 1/1/0001 Leave the hospital in   InfGastr 
+ At the moment the sickness is OFF
+ Start sickness date is 1/20/2016
+ Finish sickness date is 
