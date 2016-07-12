@@ -12,36 +12,38 @@ namespace Domain
     {
         public string NameSickness { get; }
         public SicknessStateEnum SicknessState { get; set; }
-        public Patient Pat { get; }
-        public Doctor Doc { get; set; }
-        public DateTime DateStart { get; } = DateTime.Now;
-        public DateTime? DateFinish { get; set; } = null;
+        public Patient Patient { get; }
+        public Doctor Doctor { get; set; }
+        public DateTime SicknessDateStart { get; } = DateTime.Now;
+        public DateTime? SicknessDateFinish { get; set; } = null;
 
         public static WeakDoctorQuitHandler QuitDocHandler = new WeakDoctorQuitHandler();
-        public SicknessHistory(string nameSickness, SicknessStateEnum sicknessState, Patient pacient, Doctor doctor, DateTime? dateStart = null)
+        public SicknessHistory(string nameSickness, SicknessStateEnum sicknessState, Patient pacient, 
+                               Doctor doctor, DateTime? dateStart = null)
         {
-
-            if (dateStart != null) DateStart = (DateTime)dateStart;
-            Pat = pacient;
-            Doc = doctor;
+            Patient = pacient;
+            Doctor = doctor;
             NameSickness = nameSickness;
             SicknessState = sicknessState;
-
+            SicknessDateStart = dateStart ?? DateTime.Now;
             QuitDocHandler.QuitDoc += ChangeDoctors;
         }
         public void CloseSicknessHistory(DateTime dateClose)
         {
-            DateFinish = dateClose;
+            SicknessDateFinish = dateClose;
             SicknessState = SicknessStateEnum.OFF;
         }
 
         public void ChangeDoctors(NewDoctorQuitArgs args)
         {
-            if (Doc == args .QuitDoctor)
-                Doc = args .NewDoctor;
+            if (Doctor == args .QuitDoctor)
+                Doctor = args .NewDoctor;
         }
 
-        public override string ToString() => $"Doctor  {Doc}  {NameSickness} \n At the moment the sickness is {SicknessState}\n Start sickness date is {DateStart :d}\n Finish sickness date is {DateFinish :d}";
+        public override string ToString() => $"Doctor  {Doctor}  {NameSickness} " +
+                                             $"\n At the moment the sickness is {SicknessState}\n" +
+                                             $" Start sickness date is {SicknessDateStart :d}\n " +
+                                             $"Finish sickness date is {SicknessDateFinish :d}";
        
     }
 }

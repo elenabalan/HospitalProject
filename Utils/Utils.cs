@@ -16,7 +16,7 @@ namespace Utils
             Console.WriteLine($"Print all SicknessHistories for patients in the hole hospital");
             foreach (Patient pat in patList)
             {
-                var result = sicknessHistoriesList.Where(x => (x.Pat.Name == pat.Name) && (x.Pat.Surname == pat.Surname)).Select(x => x.ToString());
+                var result = sicknessHistoriesList.Where(x => (x.Patient.Name == pat.Name) && (x.Patient.Surname == pat.Surname)).Select(x => x.ToString());
                 Console.WriteLine(pat.Name + "  " + pat.Surname + "   probolel:");
 
                 foreach (var rez in result)
@@ -34,8 +34,8 @@ namespace Utils
             var result1 =
                 listSicknessHistories.Where(
                     x =>
-                        (x.Pat.Name == pat.Name) &&
-                        (x.Pat.Surname == pat.Surname)).Select(x => x.ToString());
+                        (x.Patient.Name == pat.Name) &&
+                        (x.Patient.Surname == pat.Surname)).Select(x => x.ToString());
             Console.WriteLine(pat.Name + "  " + pat.Surname + "   probolel:");
 
             foreach (var rez in result1)
@@ -43,23 +43,23 @@ namespace Utils
                 Console.WriteLine(rez);
             }
         }
-        public static void SicknessHistoryToTXTFile(SicknessHistory sickHist)
+        public static void SicknessHistoryToTxtFile(SicknessHistory sickHist)
         {
-            FileInfo file = new FileInfo(@"D:\Projects\HospitalProject\ModelHospital\DataSicknessHistories\" + sickHist.Pat.Name + sickHist .Pat.Surname +"_" + sickHist.NameSickness + ".txt");
+            FileInfo file = new FileInfo(@"D:\Projects\HospitalProject\ModelHospital\DataSicknessHistories\" + sickHist.Patient.Name + sickHist .Patient.Surname +"_" + sickHist.NameSickness + ".txt");
 
             using (StreamWriter sw = new StreamWriter(file.OpenWrite()))
             {
-                Console.WriteLine($"Inscriem info despre istoria bolii {sickHist.NameSickness } a pacientului {sickHist.Pat.Name} {sickHist .Pat .Surname} in txt file");
-                sw.WriteLine($"Pacient {sickHist.Pat.Name} {sickHist.Pat.Surname}");
+                Console.WriteLine($"Inscriem info despre istoria bolii {sickHist.NameSickness } a pacientului {sickHist.Patient.Name} {sickHist .Patient .Surname} in txt file");
+                sw.WriteLine($"Pacient {sickHist.Patient.Name} {sickHist.Patient.Surname}");
                 sw.WriteLine($"Sickness name is {sickHist.NameSickness}");
                 sw.WriteLine($"Starea maladiei {sickHist.SicknessState}");
-                sw.WriteLine($"Data internarii {sickHist.DateStart}");
-                sw.WriteLine($"Data externarii { sickHist.DateFinish}");
-                sw.WriteLine($"Doctor {sickHist.Doc.Name} {sickHist.Doc.Surname}");
+                sw.WriteLine($"Data internarii {sickHist.SicknessDateStart}");
+                sw.WriteLine($"Data externarii { sickHist.SicknessDateFinish}");
+                sw.WriteLine($"Doctor {sickHist.Doctor.Name} {sickHist.Doctor.Surname}");
             }
 
         }
-        public static void AllSicknessHistoryToTXTFile(List<SicknessHistory> listSick)
+        public static void AllSicknessHistoryToTxtFile(List<SicknessHistory> listSick)
         {
             Console.WriteLine("Write all sickness histories into file allHistories.txt");
             string[] str = new string[listSick .Count];

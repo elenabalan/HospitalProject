@@ -11,8 +11,8 @@ namespace Domain
     {
         public int Compare(Patient x, Patient y)
         {
-            DateTime d1 = x.DateIn;
-            DateTime d2 = y.DateIn;
+            DateTime d1 = x.DateInHospital;
+            DateTime d2 = y.DateInHospital;
             return d1.CompareTo(d2);
         }
     }

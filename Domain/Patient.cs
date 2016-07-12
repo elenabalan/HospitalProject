@@ -14,17 +14,17 @@ namespace Domain
         #region FILDS AND PROPERTIES
 
      //   public int IdPacient { get; set; }
-        Doctor DoctorResponsible;
-        public DateTime DateIn { get; set; }
+        Doctor DoctorResponsible=null;
+        public DateTime DateInHospital { get; set; }
 
-        public DateTime? DateOut { get; set;}
+        public DateTime? DateOutHospital { get; set; } = null;
 
-        List<SicknessHistory> SickHistories;
+        List<SicknessHistory> SickHistories= new List<SicknessHistory>();
         #region Static Properties for Sorting
-        public static IComparer<Patient> SortByFullName
-        {
-            get { return (IComparer<Patient>)new NameComparer(); }
-        }
+        public static IComparer<Patient> SortByFullName { get; } = new NameComparer();
+        //{
+        //    get { return (IComparer<Patient>)new NameComparer(); }
+        //}
         public static IComparer<Patient> SortByDateIn
         {
             get { return new DateInComparer(); }
@@ -32,43 +32,35 @@ namespace Domain
         #endregion
         #endregion
         #region CONSTRUCTORS
-        public Patient(string name, string surname, Gender g, DateTime birthD, string adress, string phone, DateTime dIn)
+        public Patient(string name, string surname, Gender gender, DateTime birthD, string adress, string phone,
+                       DateTime dInHospital)
         {
   //          IdPacient = countPacient++;
             Name = name;
             Surname = surname;
-            Gender = g;
+            Gender = gender;
             BirthDate = birthD;
             AdressHome = adress;
             PhoneNumber = phone;
-            //  DoctorResponsible = null;
-            //DateIn = DateTime.Today;
-            DateIn = dIn;
-            DateOut = null;
-            SickHistories = new List<SicknessHistory>();
+            DateInHospital = dInHospital;
+           
+      
         }
         #endregion
         #region METHODS
-        public void InHospital(DateTime dateIn)
-        {
-            DateIn = dateIn;
-        }
-
+        public void InHospital(DateTime dateIn) => DateInHospital = dateIn;
+        
         public void OutHospital(DateTime dateOut)
         {
 
             if (dateOut.Equals(DateTime.Today) || (dateOut == null))
-                DateOut = dateOut;
+                DateOutHospital = dateOut;
             else
                 return;
 
         }
-        public override string ToString()
-        {
-            //return $"{Name} {Surname}  Data internarii {DateIn .ToShortDateString ()} Doctor {DoctorResponsible.Name} {DoctorResponsible .Surname}";
-            return $"{Name} {Surname}  Data internarii {DateIn.Day}.{DateIn.Month,2 }.{DateIn.Year} Doctor {DoctorResponsible.Name} {DoctorResponsible.Surname}";
-        }
-
+        public override string ToString()=> $"{Name} {Surname}  Data internarii {DateInHospital.Day}.{DateInHospital.Month,2 }.{DateInHospital.Year} Doctor {DoctorResponsible.Name} {DoctorResponsible.Surname}";
+        
         public void AssignDoctor(Doctor doc)
         {
             DoctorResponsible = doc;
@@ -80,20 +72,13 @@ namespace Domain
 
         public int CompareTo(Patient other)
         {
-            //Patient pTmp = (Patient)other;
-
             string fullNameThis = this.Name + " " + this.Surname;
             string fullNameObj = other.Name + " " + other.Surname;
             return fullNameThis.CompareTo(fullNameObj);
         }
-        public void Externarea(DateTime dExtrn)
-        {
-            DateOut = dExtrn;
-        }
-        public void AddSickHistory(SicknessHistory sh)
-        {
-            SickHistories.Add(sh);
-        }
+        public void Externarea(DateTime dExtrn) => DateOutHospital = dExtrn;
+        public void AddSickHistory(SicknessHistory sh) => SickHistories.Add(sh);
+        
         //public SicknessHistory CreateNewSicknessHistory(Person p, NewSicknessEventArgs arg)
         //{
 

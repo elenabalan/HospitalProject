@@ -7,7 +7,7 @@ namespace Domain
 {
     public class Hospital
     {
-        public static readonly DateTime BirthDayHospital = new DateTime( 1076,06,20);
+        public static readonly DateTime BirthDayHospital = new DateTime( 1075,06,20);
         internal string Name { get; set; }
         internal string Adress { get; set; } 
         internal string PhoneNumber { get; set; }

@@ -16,13 +16,14 @@ namespace Domain
         public string AdressHome { get; set; }
         public string PhoneNumber { get; set; }
 
-        public int Age()
-        {
-            DateTime now = DateTime.Today;
-            int  age = now.Year - BirthDate.Year;
-            if (now < BirthDate.AddYears(age)) age--;
-            return age;
-        }
-        
+        //it is calculable properties with Expression Body Members
+        public int Age => (int) (DateTime.Now - BirthDate).Days/365;  
+        //{
+        //    DateTime now = DateTime.Today;
+        //    int  age = now.Year - BirthDate.Year;
+        //    if (now < BirthDate.AddYears(age)) age--;
+        //    return age;
+        //}
+
     }
 }

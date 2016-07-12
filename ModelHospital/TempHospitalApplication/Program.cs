@@ -17,8 +17,15 @@ namespace TempHospitalApplication
         static void Main(string[] args)
         {
             Console.WriteLine("Doctori");
-            List<Doctor> doct = new List<Doctor> { new Doctor("Bordea", "Boris", Gender.M,"Stefan cel mare 2","123456987", TipDoctor.CHIRURG),
-                                    new Doctor("Albu", "Ana", Gender.F, "Aleco Russo 3", "77755566", TipDoctor.THERAPIST, new DateTime(1965, 5, 9) )};
+            List<Doctor> doct = new List<Doctor>
+            {
+                new Doctor(name: "Bordea",surname: "Boris",gender: Gender.M,phone: "123456987", adress: "Stefan cel mare 2",
+                            tipDoc: TipDoctor.CHIRURG),
+                new Doctor(surname: "Ana",name: "Albu",  gender: Gender.F, adress: "Aleco Russo 3",
+                           phone: "77755566", tipDoc: TipDoctor.THERAPIST,
+                           birthDay: new DateTime(1965, 5, 9) ,
+                           dateIn: new DateTime( 1980,08,09))
+            };
             Console.WriteLine(doct[0].ToString());
             Console.WriteLine(doct[1].ToString());
 
@@ -78,7 +85,7 @@ namespace TempHospitalApplication
             Console.WriteLine("**************  EVENTS  **************");
 
             //Apare event DoctorQuit
-           // Utils.Utils.PreluareaPacientilor(doct[0], new DateTime(2016, 07, 12), doct[1], sicknessHistories);
+            Utils.Utils.PreluareaPacientilor(doct[0], new DateTime(2016, 07, 12), doct[1], sicknessHistories);
 
             Console.WriteLine("Doctori");
             Console.WriteLine(doct[0].ToString());
@@ -86,10 +93,10 @@ namespace TempHospitalApplication
             Console.WriteLine("************************");
             //-------------------------------
 
-            Utils.Utils.SicknessHistoryToTXTFile(sicknessHistories[0]);
-            Utils.Utils.SicknessHistoryToTXTFile(sicknessHistories[1]);
+            Utils.Utils.SicknessHistoryToTxtFile(sicknessHistories[0]);
+            Utils.Utils.SicknessHistoryToTxtFile(sicknessHistories[1]);
 
-            Utils.Utils.AllSicknessHistoryToTXTFile(sicknessHistories);
+            Utils.Utils.AllSicknessHistoryToTxtFile(sicknessHistories);
             Console.ReadKey();
         }
     }
