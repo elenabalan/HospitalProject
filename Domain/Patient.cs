@@ -33,15 +33,9 @@ namespace Domain
         #endregion
         #region CONSTRUCTORS
         public Patient(string name, string surname, Gender gender, DateTime birthD, string adress, string phone,
-                       DateTime dInHospital)
+                       DateTime dInHospital):base ( name,  surname,  gender, adress,  phone, birthD)
         {
-  //          IdPacient = countPacient++;
-            Name = name;
-            Surname = surname;
-            Gender = gender;
-            BirthDate = birthD;
-            AdressHome = adress;
-            PhoneNumber = phone;
+  
             DateInHospital = dInHospital;
            
       

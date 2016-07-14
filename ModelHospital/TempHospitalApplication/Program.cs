@@ -20,7 +20,7 @@ namespace TempHospitalApplication
             List<Doctor> doct = new List<Doctor>
             {
                 new Doctor(name: "Bordea",surname: "Boris",gender: Gender.M,phone: "123456987", adress: "Stefan cel mare 2",
-                            tipDoc: TipDoctor.CHIRURG),
+                            tipDoc: TipDoctor.CHIRURG,birthDay : new DateTime( 1983,05,09)),
                 new Doctor(surname: "Ana",name: "Albu",  gender: Gender.F, adress: "Aleco Russo 3",
                            phone: "77755566", tipDoc: TipDoctor.THERAPIST,
                            birthDay: new DateTime(1965, 5, 9) ,
@@ -32,7 +32,7 @@ namespace TempHospitalApplication
             Console.WriteLine("\nPatienti");
             List<Patient> patients = new List<Patient>
             {
-                new Patient("Pupkin", "Vasea", Gender.M, new DateTime(1987, 4, 8), "Negruzzi, 67", "654789159", new DateTime(2016, 6, 1, 0, 0, 0)),
+                new Patient("Pupkin", "Vasile", Gender.M, new DateTime(1987, 4, 8), "Negruzzi, 67", "654789159", new DateTime(2016, 6, 1, 0, 0, 0)),
                 new Patient ("Dorofei", "Anatol", Gender.M, new DateTime(1975, 5, 9), "Budeci, 45", null, new DateTime(2016, 6, 15, 0, 0, 0)),
                 new Patient("Pupkin", "Ludmila", Gender.F, new DateTime(1980, 10, 18), "Decebal, 3 ap.5", "69634856", new DateTime(2016, 5, 20, 0, 0, 0))
             };
@@ -95,6 +95,8 @@ namespace TempHospitalApplication
 
             Utils.Utils.SicknessHistoryToTxtFile(sicknessHistories[0]);
             Utils.Utils.SicknessHistoryToTxtFile(sicknessHistories[1]);
+            Utils.Utils.SicknessHistoryToFileEncodigUtf8(sicknessHistories[0]);
+            Utils.Utils.SicknessHistoryToFileEncodigAscii(sicknessHistories[0]);
 
             Utils.Utils.AllSicknessHistoryToTxtFile(sicknessHistories);
             Console.ReadKey();

@@ -10,7 +10,7 @@ namespace Domain
 {
     public delegate void DoctorQuit(NewDoctorQuitArgs dateQuit);
 
-    public class Doctor : OperatingStaff
+    public class Doctor : Staff
     {
         public static int CountDoctors;
         #region FILDS AND PROPERTIES
@@ -22,16 +22,9 @@ namespace Domain
         #region CONSTRUCTORS
 
         public Doctor(string name, string surname, Gender gender, string adress, string phone,
-                      TipDoctor tipDoc, DateTime? birthDay = null, DateTime? dateIn = null)
+                      TipDoctor tipDoc, DateTime birthDay, DateTime? dateIn = null):base( name,  surname,  gender,  adress,  phone, birthDay, dateIn)
         {
-            Name = name;
-            Surname = surname;
-            Gender = gender;
-            BirthDate = birthDay ?? DateTime.Now.AddYears(-35);
-            AdressHome = adress;
-            PhoneNumber = phone;
             TipDoctor = tipDoc;
-            DateInHospital = dateIn ?? Hospital.BirthDayHospital;
         }
 
         #endregion

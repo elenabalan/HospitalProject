@@ -13,10 +13,7 @@ namespace Domain
 
         public virtual void OnDoctorQuit(NewDoctorQuitArgs a)
         {
-            if (QuitDoc != null)
-            {
-                QuitDoc(a);
-            }
+            QuitDoc?.Invoke(a);
         }
 
         //public void SimulateQuitDoctor(Doctor docQuit,DateTime dQuit, Doctor dNew)

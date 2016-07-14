@@ -11,11 +11,11 @@ namespace Domain
     public class SicknessHistory
     {
         public string NameSickness { get; }
-        public SicknessStateEnum SicknessState { get; set; }
+        public SicknessStateEnum SicknessState { get; protected set; }
         public Patient Patient { get; }
         public Doctor Doctor { get; set; }
-        public DateTime SicknessDateStart { get; } = DateTime.Now;
-        public DateTime? SicknessDateFinish { get; set; } = null;
+        public DateTime SicknessDateStart { get; } 
+        public DateTime? SicknessDateFinish { get; set; }
 
         public static WeakDoctorQuitHandler QuitDocHandler = new WeakDoctorQuitHandler();
         public SicknessHistory(string nameSickness, SicknessStateEnum sicknessState, Patient pacient, 

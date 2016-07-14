@@ -1,8 +1,6 @@
-Pacient Pupkin Vasea
+Pacient Pupkin Vasile
 Sickness name is Angina
 Starea maladiei ACTIV
-Data internarii 7/13/2016 3:46:26 PM
+Data internarii 7/13/2016 5:55:05 PM
 Data externarii 
 Doctor Albu Ana
-is
-

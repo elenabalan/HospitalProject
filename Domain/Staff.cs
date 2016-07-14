@@ -12,7 +12,14 @@ namespace Domain
         public DateTime? DateOutHospital { get; set; } = null;
 
         internal Department department { get; set; }
-        public abstract void DoWork();
+
+        protected Staff(string name, string surname, Gender gender, string adress, string phone, DateTime birthDay, DateTime? dateIn = null)
+            : base(name, surname, gender, adress, phone, birthDay)
+        {
+            DateInHospital = dateIn ?? Hospital.BirthDayHospital;
+        }
+
+      //  public abstract void DoWork();
 
         public void InHospital(DateTime dateIn)
         {
