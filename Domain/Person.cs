@@ -8,7 +8,7 @@ using System.Web;
 
 namespace Domain
 {
-    public enum Gender { M, F };
+    
     public abstract class Person
     {
         public string Name { get; } = "Default";

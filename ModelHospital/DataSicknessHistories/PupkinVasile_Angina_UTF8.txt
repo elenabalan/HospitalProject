@@ -1,6 +1,6 @@
 Pacient Pupkin Vasile
 Sickness name is Angina
 Starea maladiei ACTIV
-Data internarii 7/13/2016 5:55:05 PM
+Data internarii 7/14/2016 12:31:29 PM
 Data externarii 
-Doctor Albu Ana
+Doctor Bordea Boris

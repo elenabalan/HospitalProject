@@ -19,12 +19,13 @@ namespace TempHospitalApplication
             Console.WriteLine("Doctori");
             List<Doctor> doct = new List<Doctor>
             {
-                new Doctor(name: "Bordea",surname: "Boris",gender: Gender.M,phone: "123456987", adress: "Stefan cel mare 2",
-                            tipDoc: TipDoctor.CHIRURG,birthDay : new DateTime( 1983,05,09)),
-                new Doctor(surname: "Ana",name: "Albu",  gender: Gender.F, adress: "Aleco Russo 3",
-                           phone: "77755566", tipDoc: TipDoctor.THERAPIST,
-                           birthDay: new DateTime(1965, 5, 9) ,
-                           dateIn: new DateTime( 1980,08,09))
+                new Doctor(name: "Bordea", surname: "Boris", gender: Gender.M, phone: "123456987",
+                    adress: "Stefan cel mare 2",
+                    tipDoc: TipDoctor.CHIRURG, birthDay: new DateTime(1983, 05, 09)),
+                new Doctor(surname: "Ana", name: "Albu", gender: Gender.F, adress: "Aleco Russo 3",
+                    phone: "77755566", tipDoc: TipDoctor.THERAPIST,
+                    birthDay: new DateTime(1965, 5, 9),
+                    dateIn: new DateTime(1980, 08, 09))
             };
             Console.WriteLine(doct[0].ToString());
             Console.WriteLine(doct[1].ToString());
@@ -32,9 +33,12 @@ namespace TempHospitalApplication
             Console.WriteLine("\nPatienti");
             List<Patient> patients = new List<Patient>
             {
-                new Patient("Pupkin", "Vasile", Gender.M, new DateTime(1987, 4, 8), "Negruzzi, 67", "654789159", new DateTime(2016, 6, 1, 0, 0, 0)),
-                new Patient ("Dorofei", "Anatol", Gender.M, new DateTime(1975, 5, 9), "Budeci, 45", null, new DateTime(2016, 6, 15, 0, 0, 0)),
-                new Patient("Pupkin", "Ludmila", Gender.F, new DateTime(1980, 10, 18), "Decebal, 3 ap.5", "69634856", new DateTime(2016, 5, 20, 0, 0, 0))
+                new Patient("Pupkin", "Vasile", Gender.M, new DateTime(1987, 4, 8), "Negruzzi, 67", "654789159",
+                    new DateTime(2016, 6, 1, 0, 0, 0)),
+                new Patient("Dorofei", "Anatol", Gender.M, new DateTime(1975, 5, 9), "Budeci, 45", null,
+                    new DateTime(2016, 6, 15, 0, 0, 0)),
+                new Patient("Pupkin", "Ludmila", Gender.F, new DateTime(1980, 10, 18), "Decebal, 3 ap.5", "69634856",
+                    new DateTime(2016, 5, 20, 0, 0, 0))
             };
 
 
@@ -67,14 +71,29 @@ namespace TempHospitalApplication
 
 
             //-------------------------------
-            List<string> realSymptomsList = new List<string> { "DurCap", "Voma", "Tensiune", "DurBurta", "Anemie", "Convulsii", "Fiebra39+", "Ferba38+", "Fiebra37+" };
+            List<string> realSymptomsList = new List<string>
+            {
+                "DurCap",
+                "Voma",
+                "Tensiune",
+                "DurBurta",
+                "Anemie",
+                "Convulsii",
+                "Fiebra39+",
+                "Ferba38+",
+                "Fiebra37+"
+            };
             List<SicknessHistory> sicknessHistories = new List<SicknessHistory>
             {
-                new SicknessHistory( "Angina", SicknessStateEnum.ACTIV,patients.ElementAt(0), doct .ElementAt(0)),
-                new SicknessHistory( "Hipertensiune", SicknessStateEnum.CHRONIC,patients.ElementAt(1), doct .ElementAt(0), new DateTime( 2014,04,23)),
-                new SicknessHistory( "Otita", SicknessStateEnum.ACTIV, patients.ElementAt(2), doct .ElementAt(1), new DateTime( 2016,03,30)),
-                new SicknessHistory( "Gastrita", SicknessStateEnum.CHRONIC,patients.ElementAt(2), doct .ElementAt(1), new DateTime( 2015,11,07)),
-                new SicknessHistory( "InfGastr", SicknessStateEnum.OFF,patients.ElementAt(1), doct .ElementAt(1), new DateTime( 2016,01,20))
+                new SicknessHistory("Angina", SicknessStateEnum.ACTIV, patients.ElementAt(0), doct.ElementAt(0)),
+                new SicknessHistory("Hipertensiune", SicknessStateEnum.CHRONIC, patients.ElementAt(1), doct.ElementAt(0),
+                    new DateTime(2014, 04, 23)),
+                new SicknessHistory("Otita", SicknessStateEnum.ACTIV, patients.ElementAt(2), doct.ElementAt(1),
+                    new DateTime(2016, 03, 30)),
+                new SicknessHistory("Gastrita", SicknessStateEnum.CHRONIC, patients.ElementAt(2), doct.ElementAt(1),
+                    new DateTime(2015, 11, 07)),
+                new SicknessHistory("InfGastr", SicknessStateEnum.OFF, patients.ElementAt(1), doct.ElementAt(1),
+                    new DateTime(2016, 01, 20))
             };
             Console.WriteLine("************************");
 
@@ -85,7 +104,7 @@ namespace TempHospitalApplication
             Console.WriteLine("**************  EVENTS  **************");
 
             //Apare event DoctorQuit
-            Utils.Utils.PreluareaPacientilor(doct[0], new DateTime(2016, 07, 12), doct[1], sicknessHistories);
+           // Utils.Utils.PreluareaPacientilor(doct[0], new DateTime(2016, 07, 12), doct[1], sicknessHistories);
 
             Console.WriteLine("Doctori");
             Console.WriteLine(doct[0].ToString());
@@ -99,6 +118,30 @@ namespace TempHospitalApplication
             Utils.Utils.SicknessHistoryToFileEncodigAscii(sicknessHistories[0]);
 
             Utils.Utils.AllSicknessHistoryToTxtFile(sicknessHistories);
+
+            Console.WriteLine("************************");
+            Console.WriteLine("************************");
+            // Create a List of Patients using Factory CreatorPersonInHospital
+            CreatorDoctor creatorDoctor = new CreatorDoctor();
+            CreatorPatient creatorPacient = new CreatorPatient();
+
+
+            List<Patient> patientsFabric = new List<Patient>();
+
+            patientsFabric.Add((Patient)creatorPacient.Create(name: "Pupkin", surname: "Vasile", gender: Gender.M,
+                birthDay: new DateTime(1987, 4, 8), adressHome: "Negruzzi, 67", phoneNumber: "654789159", dateIn: new DateTime(2016, 6, 1)));
+            patientsFabric.Add((Patient)creatorPacient.Create(name: "Dorofei", surname: "Anatol", gender: Gender.M,
+                birthDay: new DateTime(1975, 5, 9), adressHome: "Budeci, 45", phoneNumber: null, dateIn: new DateTime(2016, 6, 15)));
+            patientsFabric.Add((Patient)creatorPacient.Create(name: "Balan", surname: "Ludmila", gender: Gender.F,
+                birthDay: new DateTime(1980, 10, 18), adressHome: "Decebal, 3 ap.5", phoneNumber: "69634856", dateIn: new DateTime(2016, 5, 20)));
+
+            patientsFabric[0].AssignDoctor(doct[0]);
+            patientsFabric[1].AssignDoctor(doct[0]);
+            patientsFabric [2].AssignDoctor(doct[1]);
+   
+            Console.WriteLine(patientsFabric[0].ToString());
+            Console.WriteLine(patientsFabric[1].ToString());
+            Console.WriteLine(patientsFabric[2].ToString());
             Console.ReadKey();
         }
     }

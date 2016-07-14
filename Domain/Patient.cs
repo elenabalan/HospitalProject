@@ -33,10 +33,10 @@ namespace Domain
         #endregion
         #region CONSTRUCTORS
         public Patient(string name, string surname, Gender gender, DateTime birthD, string adress, string phone,
-                       DateTime dInHospital):base ( name,  surname,  gender, adress,  phone, birthD)
+                       DateTime? dInHospital):base ( name,  surname,  gender, adress,  phone, birthD)
         {
-  
-            DateInHospital = dInHospital;
+            if(dInHospital ==null) dInHospital =DateTime.Now;
+            DateInHospital = (DateTime)dInHospital;
            
       
         }
