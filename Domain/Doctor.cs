@@ -15,15 +15,17 @@ namespace Domain
         public static int CountDoctors;
         #region FILDS AND PROPERTIES
 
-        private TipDoctor TipDoctor { get;}
+        private TipDoctor? TipDoctor { get;}
         public List<Patient> ListPatients = new List<Patient>();
         #endregion
 
         #region CONSTRUCTORS
 
         public Doctor(string name, string surname, Gender gender, string adress, string phone,
-                      TipDoctor tipDoc, DateTime birthDay, DateTime? dateIn = null):base( name,  surname,  gender,  adress,  phone, birthDay, dateIn)
+                      TipDoctor? tipDoc, DateTime birthDay, DateTime? dateIn = null):base( name,  surname,  gender,  adress,  phone, birthDay, dateIn)
         {
+            if (tipDoc == null)
+                throw new Exception($"{nameof(tipDoc)} is not specified");
             TipDoctor = tipDoc;
         }
 

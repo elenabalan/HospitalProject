@@ -19,19 +19,19 @@ namespace Domain
         ////it is calculable properties with Expression Body Members
         //public int Age => (int)(DateTime.Now - BirthDate).Days / 365;
 
-        public CreatorPersonInHospital()
+        protected  CreatorPersonInHospital()
         {
         }
 
         protected CreatorPersonInHospital(string name, string surname, Gender gender, string adressHome,
             string phoneNumber, DateTime birthDay)
         {
-            if (String.IsNullOrEmpty(name)) throw new ArgumentNullException($"{nameof(name)} is null");
-            if (String.IsNullOrEmpty(surname)) throw new ArgumentNullException($"{nameof(surname)} is null");
+            //if (String.IsNullOrEmpty(name)) throw new ArgumentNullException($"{nameof(name)} is null");
+            //if (String.IsNullOrEmpty(surname)) throw new ArgumentNullException($"{nameof(surname)} is null");
         }
 
         public abstract Person Create(string name, string surname, Gender gender, string adressHome,
-            string phoneNumber, DateTime birthDay,  DateTime? dateIn = null ,TipDoctor tipDoc = TipDoctor.GENERAL);
+            string phoneNumber, DateTime birthDay, TipDoctor? tipDoc = null,  DateTime? dateIn = null );
 
     }
 }

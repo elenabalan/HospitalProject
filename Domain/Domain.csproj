@@ -60,11 +60,13 @@
     <Compile Include="Sickness.cs" />
     <Compile Include="SicknessHistory.cs" />
     <Compile Include="SicknessStateEnum.cs" />
+    <Compile Include="SingletonFactory.cs" />
     <Compile Include="Staff.cs" />
     <Compile Include="Symptom.cs" />
     <Compile Include="TipDoctor.cs" />
     <Compile Include="WeakDoctorQuitHandler.cs" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

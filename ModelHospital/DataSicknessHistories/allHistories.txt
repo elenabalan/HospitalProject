@@ -1,30 +1,30 @@
 Doctor  
-Bordea Boris CHIRURG BirthDate is in 5/9/1983. Age is 33 
-Comes in hospital in 6/20/1075 Leave the hospital in   Angina 
+Bordea Boris CHIRURG BirthDate is in 83/05/09. Age is 33 
+Comes in hospital in 75/06/20 Leave the hospital in   Angina 
  At the moment the sickness is ACTIV
- Start sickness date is 7/14/2016
+ Start sickness date is 16/07/15
  Finish sickness date is 
 Doctor  
-Bordea Boris CHIRURG BirthDate is in 5/9/1983. Age is 33 
-Comes in hospital in 6/20/1075 Leave the hospital in   Hipertensiune 
+Bordea Boris CHIRURG BirthDate is in 83/05/09. Age is 33 
+Comes in hospital in 75/06/20 Leave the hospital in   Hipertensiune 
  At the moment the sickness is CHRONIC
- Start sickness date is 4/23/2014
+ Start sickness date is 14/04/23
  Finish sickness date is 
 Doctor  
-Albu Ana THERAPIST BirthDate is in 5/9/1965. Age is 51 
-Comes in hospital in 8/9/1980 Leave the hospital in   Otita 
+Albu Ana THERAPIST BirthDate is in 65/05/09. Age is 51 
+Comes in hospital in 80/08/09 Leave the hospital in   Otita 
  At the moment the sickness is ACTIV
- Start sickness date is 3/30/2016
+ Start sickness date is 16/03/30
  Finish sickness date is 
 Doctor  
-Albu Ana THERAPIST BirthDate is in 5/9/1965. Age is 51 
-Comes in hospital in 8/9/1980 Leave the hospital in   Gastrita 
+Albu Ana THERAPIST BirthDate is in 65/05/09. Age is 51 
+Comes in hospital in 80/08/09 Leave the hospital in   Gastrita 
  At the moment the sickness is CHRONIC
- Start sickness date is 11/7/2015
+ Start sickness date is 15/11/07
  Finish sickness date is 
 Doctor  
-Albu Ana THERAPIST BirthDate is in 5/9/1965. Age is 51 
-Comes in hospital in 8/9/1980 Leave the hospital in   InfGastr 
+Albu Ana THERAPIST BirthDate is in 65/05/09. Age is 51 
+Comes in hospital in 80/08/09 Leave the hospital in   InfGastr 
  At the moment the sickness is OFF
- Start sickness date is 1/20/2016
+ Start sickness date is 16/01/20
  Finish sickness date is 

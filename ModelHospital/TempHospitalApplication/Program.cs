@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -104,7 +105,7 @@ namespace TempHospitalApplication
             Console.WriteLine("**************  EVENTS  **************");
 
             //Apare event DoctorQuit
-           // Utils.Utils.PreluareaPacientilor(doct[0], new DateTime(2016, 07, 12), doct[1], sicknessHistories);
+            // Utils.Utils.PreluareaPacientilor(doct[0], new DateTime(2016, 07, 12), doct[1], sicknessHistories);
 
             Console.WriteLine("Doctori");
             Console.WriteLine(doct[0].ToString());
@@ -121,8 +122,9 @@ namespace TempHospitalApplication
 
             Console.WriteLine("************************");
             Console.WriteLine("************************");
+            Console.WriteLine("Create a List of Patients using Factory CreatorPersonInHospital");
             // Create a List of Patients using Factory CreatorPersonInHospital
-            CreatorDoctor creatorDoctor = new CreatorDoctor();
+            //  CreatorDoctor creatorDoctor = new CreatorDoctor();
             CreatorPatient creatorPacient = new CreatorPatient();
 
 
@@ -135,13 +137,68 @@ namespace TempHospitalApplication
             patientsFabric.Add((Patient)creatorPacient.Create(name: "Balan", surname: "Ludmila", gender: Gender.F,
                 birthDay: new DateTime(1980, 10, 18), adressHome: "Decebal, 3 ap.5", phoneNumber: "69634856", dateIn: new DateTime(2016, 5, 20)));
 
+            //  var convertedPatients = patientsFabric.ConvertAll(new Converter<Person,Patient>());
+
             patientsFabric[0].AssignDoctor(doct[0]);
             patientsFabric[1].AssignDoctor(doct[0]);
-            patientsFabric [2].AssignDoctor(doct[1]);
-   
+            patientsFabric[2].AssignDoctor(doct[1]);
+
             Console.WriteLine(patientsFabric[0].ToString());
             Console.WriteLine(patientsFabric[1].ToString());
             Console.WriteLine(patientsFabric[2].ToString());
+
+            Console.WriteLine("************************");
+            Console.WriteLine("************************");
+            Console.WriteLine("Create a List of Doctors using SingletonFactory");
+            SingletonFactory factoryPersonInHospital;
+
+            // var qw = new SingletonFactory();
+            List<Doctor> doctorsFabric = new List<Doctor>();
+
+            try
+            {
+
+                doctorsFabric.Add(SingletonFactory.Instance.CreateDoctor(
+                    name: "Bordea", surname: "Boris", gender: Gender.M, phoneNumber: "123456987",
+                    adressHome: "Stefan cel mare 2", tipDoc: TipDoctor.CHIRURG, birthDay: new DateTime(1983, 05, 09)));
+
+            }
+            catch (ArgumentException exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            try
+            {
+                doctorsFabric.Add(SingletonFactory.Instance.CreateDoctor(
+                surname: "Ana", name: "Albu", gender: Gender.F, adressHome: "Aleco Russo 3",
+                phoneNumber: "77755566", tipDoc: TipDoctor.THERAPIST,
+                birthDay: new DateTime(1965, 5, 9), dateIn: new DateTime(1980, 08, 09)));
+            }
+            catch (ArgumentException exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+            try
+            {
+                doctorsFabric.Add(SingletonFactory.Instance.CreateDoctor(
+                surname: "Mariuta", name: "Bejenari", gender: Gender.F, adressHome: "Aleco Russo 3",
+                phoneNumber: "25478934", tipDoc: TipDoctor.THERAPIST,
+                birthDay: new DateTime(2000, 5, 9)));
+
+            }
+            catch (ArgumentException exception)
+            {
+                Console.WriteLine(exception.Message);
+            }
+
+            Console.WriteLine("Doctori");
+            foreach (Doctor item in doctorsFabric)
+                Console.WriteLine(item.ToString());
+
+            Console.WriteLine("************************");
+            //-------------------------------
+
+
             Console.ReadKey();
         }
     }

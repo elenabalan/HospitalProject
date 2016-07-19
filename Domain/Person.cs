@@ -26,14 +26,10 @@ namespace Domain
             string phoneNumber, DateTime birthDay)
         {
             if (String.IsNullOrEmpty(name)) throw new ArgumentNullException($"{nameof(name)} is null");
-            Name = name;
-        
-                
             if (String.IsNullOrEmpty(surname)) throw new ArgumentNullException($"{nameof(surname)} is null");
-            Surname = surname;
-           
-               
 
+            Name = name;
+            Surname = surname;
             Gender = gender;
             BirthDate = birthDay;
             AdressHome = adressHome;
