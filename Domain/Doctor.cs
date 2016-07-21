@@ -1,12 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static Domain.Hospital;
+using Domain.ChangeDoctor;
 
-
-namespace Domain
+namespace Domain.PersonInHospital
 {
     public delegate void DoctorQuit(NewDoctorQuitArgs dateQuit);
 

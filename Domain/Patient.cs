@@ -1,13 +1,13 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using Domain.ChangeDoctor;
+using Domain.PersonComparers;
+using Domain.Sicknesses;
 
-namespace Domain
+namespace Domain.PersonInHospital
 {
     delegate void FinishSicknessHandler(DateTime d);
-    public class Patient : Person, IPersonInOutHospital, IComparable<Patient>
+    public class Patient : Person, IComparable<Patient>
     {
         
         private static int countPacient = 0;
@@ -15,9 +15,9 @@ namespace Domain
 
      //   public int IdPacient { get; set; }
         Doctor DoctorResponsible=null;
-        public DateTime DateInHospital { get; set; }
+       // public DateTime DateInHospital { get; set; }
 
-        public DateTime? DateOutHospital { get; set; } = null;
+//        public DateTime? DateOutHospital { get; set; } = null;
 
         List<SicknessHistory> SickHistories= new List<SicknessHistory>();
         #region Static Properties for Sorting

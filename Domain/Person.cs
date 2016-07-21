@@ -1,16 +1,11 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
-using System.Web;
 
-
-namespace Domain
+namespace Domain.PersonInHospital
 {
     
     public abstract class Person
     {
+
         public string Name { get; } = "Default";
 
         public string Surname { get; set; }
@@ -18,6 +13,8 @@ namespace Domain
         public DateTime BirthDate { get; set; }
         public string AdressHome { get; set; }
         public string PhoneNumber { get; set; }
+        public DateTime DateInHospital { get; set; }
+        public DateTime? DateOutHospital { get; set; }
 
         //it is calculable properties with Expression Body Members
         public int Age => (int)(DateTime.Now - BirthDate).Days / 365;

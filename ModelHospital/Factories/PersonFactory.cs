@@ -1,27 +1,24 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+using Domain;
+using Domain.PersonInHospital;
 
-namespace Domain
+namespace Factories
 {
-    public sealed class SingletonFactory
+    public sealed class PersonFactory
     {
-        private static readonly SingletonFactory instance = new SingletonFactory();
+        private static readonly PersonFactory instance = new PersonFactory();
 
-        static SingletonFactory()
+        static PersonFactory()
         {
             Console.WriteLine("Static constructor worked");
         }
 
-        private SingletonFactory()
+        private PersonFactory()
         {
             Console.WriteLine("Private constructor ");
         }
 
-        public static SingletonFactory Instance => instance;
+        public static PersonFactory Instance => instance;
         public Doctor CreateDoctor(string name, string surname, Gender gender, string adressHome,
             string phoneNumber, DateTime birthDay, TipDoctor tipDoc, DateTime? dateIn = null )
         {

@@ -48,6 +48,10 @@
       <Project>{7c3ee063-8a34-4994-8964-18b6789c7d16}</Project>
       <Name>Domain</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ModelHospital\Common.Hospital\Common.Hospital.csproj">
+      <Project>{69AE23F0-D557-4FC5-9C2B-3C1AFC53F82F}</Project>
+      <Name>Common.Hospital</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

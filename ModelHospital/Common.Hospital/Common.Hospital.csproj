@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{7C3EE063-8A34-4994-8964-18B6789C7D16}</ProjectGuid>
+    <ProjectGuid>{69AE23F0-D557-4FC5-9C2B-3C1AFC53F82F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Domain</RootNamespace>
-    <AssemblyName>Domain</AssemblyName>
+    <RootNamespace>Common.Hospital</RootNamespace>
+    <AssemblyName>Common.Hospital</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,31 +40,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DateInComparer.cs" />
-    <Compile Include="Delete\CreatePersonInHospital.cs" />
-    <Compile Include="Delete\CreatorDoctor.cs" />
-    <Compile Include="Delete\CreatorPatient.cs" />
-    <Compile Include="Delete\Department.cs" />
-    <Compile Include="Doctor.cs" />
-    <Compile Include="Delete\EventFinishSicknessHandler.cs" />
-    <Compile Include="Delete\Hospital.cs" />
-    <Compile Include="ChangeDoctor\NewDoctorQuitArgs.cs" />
-    <Compile Include="ChangeDoctor\NewSicknessHistoryArgs.cs" />
-    <Compile Include="NameComparer.cs" />
-    <Compile Include="Patient.cs" />
-    <Compile Include="Person.cs" />
+    <Compile Include="Gender.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Delete\Sickness.cs" />
-    <Compile Include="SicknessHistory.cs" />
-    <Compile Include="Staff.cs" />
-    <Compile Include="Delete\Symptom.cs" />
-    <Compile Include="ChangeDoctor\WeakDoctorQuitHandler.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ModelHospital\Common.Hospital\Common.Hospital.csproj">
-      <Project>{69ae23f0-d557-4fc5-9c2b-3c1afc53f82f}</Project>
-      <Name>Common.Hospital</Name>
-    </ProjectReference>
+    <Compile Include="SicknessStateEnum.cs" />
+    <Compile Include="TipDoctor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -1,7 +1,8 @@
 Pacient Dorofei Anatol
 Sickness name is Hipertensiune
 Starea maladiei CHRONIC
-Data internarii 14/04/23 12:00:00 AM
+Data internarii 23/04/2014 00:00:00
 Data externarii 
 Doctor Bordea Boris
+
 
