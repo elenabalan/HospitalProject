@@ -1,25 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using Domain.ChangeDoctor;
-using Domain.PersonComparers;
-using Domain.Sicknesses;
 
-namespace Domain.PersonInHospital
+namespace Domain
 {
     delegate void FinishSicknessHandler(DateTime d);
+
     public class Patient : Person, IComparable<Patient>
     {
-        
-        private static int countPacient = 0;
+
+    //    private static int countPacient = 0;
+
         #region FILDS AND PROPERTIES
 
-     //   public int IdPacient { get; set; }
-        Doctor DoctorResponsible=null;
-       // public DateTime DateInHospital { get; set; }
+        public Doctor DoctorResponsible  {set; get;}
 
-//        public DateTime? DateOutHospital { get; set; } = null;
-
-        List<SicknessHistory> SickHistories= new List<SicknessHistory>();
+List<SicknessHistory> SickHistories= new List<SicknessHistory>();
+       
         #region Static Properties for Sorting
         public static IComparer<Patient> SortByFullName { get; } = new NameComparer();
         //{
@@ -42,26 +38,26 @@ namespace Domain.PersonInHospital
         }
         #endregion
         #region METHODS
-        public void InHospital(DateTime dateIn) => DateInHospital = dateIn;
+        //public void InHospital(DateTime dateIn) => DateInHospital = dateIn;
         
-        public void OutHospital(DateTime dateOut)
-        {
+        //public void OutHospital(DateTime dateOut)
+        //{
 
-            if (dateOut.Equals(DateTime.Today) || (dateOut == null))
-                DateOutHospital = dateOut;
-            else
-                return;
+        //    if (dateOut.Equals(DateTime.Today) || (dateOut == null))
+        //        DateOutHospital = dateOut;
+        //    else
+        //        return;
 
-        }
+        //}
         public override string ToString()=> $"{Name} {Surname}  Data internarii {DateInHospital.Day}.{DateInHospital.Month,2 }.{DateInHospital.Year} Doctor {DoctorResponsible.Name} {DoctorResponsible.Surname}";
         
         public void AssignDoctor(Doctor doc)
         {
             DoctorResponsible = doc;
-            Patient p = this;
-            if (p == null)
+            //Patient p = this;
+            if (doc == null)
                 throw (new ArgumentNullException());
-            (doc.ListPatients).Add(p);
+            (doc.ListPatients).Add(this);
         }
 
         public int CompareTo(Patient other)
@@ -71,7 +67,7 @@ namespace Domain.PersonInHospital
             return fullNameThis.CompareTo(fullNameObj);
         }
         public void Externarea(DateTime dExtrn) => DateOutHospital = dExtrn;
-        public void AddSickHistory(SicknessHistory sh) => SickHistories.Add(sh);
+      //  public void AddSickHistory(SicknessHistory sh) => SickHistories.Add(sh);
         
         //public SicknessHistory CreateNewSicknessHistory(Person p, NewSicknessEventArgs arg)
         //{

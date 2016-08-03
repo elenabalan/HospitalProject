@@ -1,0 +1,1 @@
+Select IdPerson,Name,Surname,Birthday from Person

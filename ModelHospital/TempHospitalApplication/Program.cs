@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
+using System.Configuration;
 using System.Linq;
 using Domain;
-using Domain.PersonInHospital;
-using Domain.Sicknesses;
 using Factories;
 using Hospital.Interfaces;
+using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
 
 namespace TempHospitalApplication
 {
-    delegate SicknessHistory StartSicknessHandler<Patient, NewStartSicknessEventArgs>(Patient p, NewStartSicknessEventArgs a);
+    delegate SicknessHistory StartSicknessHandler<TPatient, NewStartSicknessEventArgs>(TPatient p, NewStartSicknessEventArgs a);
     class Program
     {
         private static IPersonManagement _personManagement;
@@ -19,7 +22,7 @@ namespace TempHospitalApplication
             _personManagement = personManagement;
         }
 
-        static void Main(string[] args)
+        public static void ConsoleIO()
         {
             #region MockData
             Console.WriteLine("Doctori");
@@ -155,7 +158,7 @@ namespace TempHospitalApplication
             Console.WriteLine("************************");
             Console.WriteLine("************************");
             Console.WriteLine("Create a List of Doctors using SingletonFactory");
-            PersonFactory factoryPersonInHospital;
+            //       PersonFactory factoryPersonInHospital;
 
             // var qw = new SingletonFactory();
             List<Doctor> doctorsFabric = new List<Doctor>();
@@ -205,11 +208,180 @@ namespace TempHospitalApplication
 
 
             Console.ReadKey();
-#endregion
+            #endregion
+        }
 
-        //  _personManagement.InHospital()
+        //public class A
+        //{
+        //    public A()
+        //    {
+        //    }
 
-           //var updatedPatient = _personManagement.InHospital(DateTime.Now, new Patient("q"));
+        //    public void Do()
+        //    {
+        //        Console.WriteLine("Do from non static A");
+        //    }
+        //}
+
+        static void Main(string[] args)
+        {
+            //A aaa = new A();
+            //aaa.Do();
+
+            //ConsoleIO();
+
+            string connectionString = ConfigurationManager.ConnectionStrings["hospital"].ConnectionString;
+
+            using (var sqlConnection = new SqlConnection(connectionString))
+            {
+
+                sqlConnection.Open();
+
+                //// Try SqlCommand ExecuteScalar()
+                //var sqlSelectCommandText = "Select Name from Person where IdPerson=1";
+                //using (var sqlSelectCommand = new SqlCommand(sqlSelectCommandText, sqlConnection))
+                //{
+                //    Console.WriteLine(sqlSelectCommand.ExecuteScalar());
+                //}
+
+
+                ////Create table TestTable
+                //var sqlCommandText =
+                //        "CREATE TABLE TestTable(Id bigint identity(1,1) primary key, Name varchar(50) not null)";
+                //using (var sqlCommand = new SqlCommand(sqlCommandText,sqlConnection))
+                //{
+                //    var rez = sqlCommand.ExecuteNonQuery();
+                //    Console.WriteLine($"sqlCommand.ExecuteNonQuery() return the value {rez}");
+                //}
+
+                ////Try ExecuteReader()
+                //var sqlSelectCommandText = "Select * from Phone";
+                //using (var sqlSelectCommand = new SqlCommand(sqlSelectCommandText, sqlConnection))
+                //{
+                //    SqlDataReader reader = sqlSelectCommand.ExecuteReader();
+                //    while (reader.Read())
+                //    {
+                //        long id = (long) reader["id"];
+                //        long personId = (long) reader["personId"];
+                //        int prefix = (int) reader["prefix"];
+                //        Console.WriteLine($"{id,4}{personId,4}{prefix,6}");
+                //    }
+                //}
+
+                //Query parametrization
+
+                var sqlSelectParametrizationText = "select * from Phone where id=@id;";
+                using (var sqlSelectParam = new SqlCommand(sqlSelectParametrizationText, sqlConnection))
+                {
+                    sqlSelectParam.Parameters.Add("@id", SqlDbType.BigInt);
+                    SqlDataReader reader;
+                   
+                        sqlSelectParam.Parameters["@id"].Value = 5;
+                        reader = sqlSelectParam.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            long id = (long)reader["id"];
+                            long personId = (long)reader["personId"];
+                            int prefix = (int)reader["prefix"];
+                            Console.WriteLine($"{id,4}{personId,4}{prefix,6}");
+                            //Console.WriteLine($"{(string)reader["id"],4}{(string)reader["idPerson"],4},{(string)reader["prefix"],6}");
+                        }
+
+                    
+                  }
+
+
+                    ////DataTable
+
+                    //    DataTable PhoneTable = new DataTable();
+                    //    DataColumn IdColumn = new DataColumn("Id",typeof(long));
+
+                    //    PhoneTable.Columns.Add(IdColumn);
+                    //    PhoneTable.Columns.Add("IdPerson", typeof(long));
+                    //    PhoneTable.Columns.Add("Prefix", typeof(int));
+
+                    //    DataRow row1 = PhoneTable.NewRow();
+                    //    row1["Id"] = 1;
+                    //    row1["IdPerson"] = 1;
+                    //    row1["Prefix"] = 3;
+                    //    PhoneTable.Rows.Add(row1);
+
+
+                    //???????????????????????????
+                    //Using DataAdapter
+                //    var sqlSelectCommandText = "Select IdPerson,Name,Surname,Birthday from Person";
+                //SqlDataAdapter adapter = new SqlDataAdapter(sqlSelectCommandText, sqlConnection);
+                //DataSet dataSet = new DataSet();
+
+                //adapter.SelectCommand = new SqlCommand(sqlSelectCommandText);
+                //adapter.UpdateCommand = new SqlCommand("insert into TestTable (Name) values(@Name)");
+
+                //adapter.UpdateCommand.Parameters.Add("@Name", SqlDbType.VarChar, 50, "Name");
+                //adapter.Parameters["@Name"] = "Valentin";
+                //dataSet.Tables.Add("PersonTable");  //????????????/
+                 
+                //adapter.Fill(dataSet);
+               
+                ////    adapter.FillSchema(dataSet, SchemaType.Mapped);
+                ////     adapter.Fill(PersonTable);
+
+                //foreach (DataRow row in dataSet.Tables["Table"].Rows)
+                ////DataTable PersonTable = dataSet.Tables["Table"];
+                ////foreach (DataRow row in PersonTable.Rows)
+                //{
+                //    Console.WriteLine($"{row["IdPerson"],4}{row["Name"],10}{row["Surname"],10}{row["Birthday"],20}");
+                //}
+
+                //////------------------------------------
+                ////New row in dataSet
+                //DataRow newRow = dataSet.Tables["Table"].NewRow();
+                //newRow[0] = 8;
+                //newRow[1] = "Balta";
+                //newRow[2] = "Eugen";
+                //newRow[3] = new DateTime(2010, 08, 21);
+                //dataSet.Tables["Table"].Rows.Add(newRow);
+
+
+                //foreach (DataRow row in dataSet.Tables["Table"].Rows)
+                ////DataTable PersonTable = dataSet.Tables["Table"];
+                ////foreach (DataRow row in PersonTable.Rows)
+                //{
+                //    Console.WriteLine($"{row["IdPerson"],4}{row["Name"],10}{row["Surname"],10}{row["Birthday"],20}");
+                //}
+
+                //adapter
+                //adapter.Update(dataSet);
+               
+                //???????????????????
+
+                //Create table TestTable and Insert several rows
+
+                //  DataAdapter adapter = new SqlDataAdapter();
+                //  var sqlCommandText =
+                //         "insert into TestTable (Name) values(@Name)";
+                //  SqlCommand insertCommand = new SqlCommand(sqlCommandText, sqlConnection);
+                //  insertCommand.Parameters.Add("@Name", SqlDbType.VarChar, 50, "Name");
+
+
+
+
+
+
+                //  insertCommand.Parameters["@Name"] = "Valentin";
+
+                ////  adapter.
+
+                //   Console.ReadKey();
+
+
+            }
+
+
+            Console.ReadKey();
+            //  _personManagement.InHospital()
+
+            //var updatedPatient = _personManagement.InHospital(DateTime.Now, new Patient("q"));
 
         }
     }

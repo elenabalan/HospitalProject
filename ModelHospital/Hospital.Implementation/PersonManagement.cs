@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domain;
 using Domain.ChangeDoctor;
-using Domain.PersonInHospital;
 using Hospital.Interfaces;
 
 namespace Hospital.Implementation

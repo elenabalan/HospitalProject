@@ -2,7 +2,7 @@ Doctor
 Bordea Boris CHIRURG BirthDate is in 09/05/1983. Age is 33 
 Comes in hospital in 20/06/1075 Leave the hospital in   Angina 
  At the moment the sickness is ACTIV
- Start sickness date is 20/07/2016
+ Start sickness date is 02/08/2016
  Finish sickness date is 
 Doctor  
 Bordea Boris CHIRURG BirthDate is in 09/05/1983. Age is 33 

@@ -1,6 +1,5 @@
 ﻿using System;
 using Domain;
-using Domain.PersonInHospital;
 
 namespace Factories
 {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Domain.ChangeDoctor;
 
-namespace Domain.PersonInHospital
+namespace Domain
 {
     public delegate void DoctorQuit(NewDoctorQuitArgs dateQuit);
 

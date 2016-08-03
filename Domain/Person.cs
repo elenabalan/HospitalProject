@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Domain.PersonInHospital
+namespace Domain
 {
     
     public abstract class Person

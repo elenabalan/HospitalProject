@@ -1,6 +1,4 @@
-﻿using Domain.PersonInHospital;
-
-namespace Domain.ChangeDoctor
+﻿namespace Domain.ChangeDoctor
 {
     public class WeakDoctorQuitHandler
     {

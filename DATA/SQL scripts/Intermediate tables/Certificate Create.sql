@@ -1,0 +1,11 @@
+
+CREATE TABLE Certificate
+(
+	Id	VARCHAR(50) NOT NULL,
+	DomainName VARCHAR(50)	NOT NULL,
+	DateExpiration DATE NOT NULL,
+
+	CONSTRAINT [PK_Id] PRIMARY KEY CLUSTERED([Id])
+	
+)
+

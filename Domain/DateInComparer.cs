@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using Domain.PersonInHospital;
 
-
-namespace Domain.PersonComparers
+namespace Domain
 {
     class DateInComparer : IComparer<Patient>
 

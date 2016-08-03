@@ -1,5 +1,5 @@
 ﻿using System;
-using Domain.PersonInHospital;
+using Domain;
 
 namespace Hospital.Interfaces
 {           

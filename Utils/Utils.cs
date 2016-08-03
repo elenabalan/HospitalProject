@@ -6,8 +6,6 @@ using System.Threading.Tasks;
 using Domain;
 using System.IO;
 using Domain.ChangeDoctor;
-using Domain.PersonInHospital;
-using Domain.Sicknesses;
 
 namespace Utils
 {

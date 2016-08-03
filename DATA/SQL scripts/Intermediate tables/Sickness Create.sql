@@ -1,0 +1,10 @@
+CREATE TABLE Sickness
+(
+
+Name  VARCHAR(50) NOT NULL,
+
+
+CONSTRAINT PK_SicknessName PRIMARY KEY (Name)
+
+
+);

@@ -1,8 +1,7 @@
 ﻿using System;
 using Domain.ChangeDoctor;
-using Domain.PersonInHospital;
 
-namespace Domain.Sicknesses
+namespace Domain
 {
     public class SicknessHistory
     {

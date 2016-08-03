@@ -1,5 +1,4 @@
 ﻿using System;
-using Domain.PersonInHospital;
 
 namespace Domain.ChangeDoctor
 {
