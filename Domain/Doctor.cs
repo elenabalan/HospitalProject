@@ -7,12 +7,12 @@ namespace Domain
 {
     public delegate void DoctorQuit(NewDoctorQuitArgs dateQuit);
 
-    public class Doctor : Staff
+    public class Doctor : Person
     {
-        public static int CountDoctors;
+       // public static int CountDoctors;
         #region FILDS AND PROPERTIES
 
-        private TipDoctor? TipDoctor { get;}
+        public virtual TipDoctor? TipDoctor { get;}
         public List<Patient> ListPatients = new List<Patient>();
         #endregion
 

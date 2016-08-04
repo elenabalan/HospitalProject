@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Configuration;
 using System.Linq;
 using Domain;
@@ -9,17 +10,28 @@ using Hospital.Interfaces;
 using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
+using System.Security.Cryptography;
+using Repository.Interfaces;
+using Hospital.Infrastructure;
 
 namespace TempHospitalApplication
 {
     delegate SicknessHistory StartSicknessHandler<TPatient, NewStartSicknessEventArgs>(TPatient p, NewStartSicknessEventArgs a);
     class Program
     {
-        private static IPersonManagement _personManagement;
+     
+        private static IRepository _repository;
 
-        public Program(IPersonManagement personManagement)
+        static Program()
         {
-            _personManagement = personManagement;
+            ServiceLocator.RegisterAll();
+            _repository = ServiceLocator.Resolver<IRepository>();
+        }
+
+        public Program()
+        {
+          
+          
         }
 
         public static void ConsoleIO()
@@ -211,23 +223,9 @@ namespace TempHospitalApplication
             #endregion
         }
 
-        //public class A
-        //{
-        //    public A()
-        //    {
-        //    }
-
-        //    public void Do()
-        //    {
-        //        Console.WriteLine("Do from non static A");
-        //    }
-        //}
-
+ 
         static void Main(string[] args)
         {
-            //A aaa = new A();
-            //aaa.Do();
-
             //ConsoleIO();
 
             string connectionString = ConfigurationManager.ConnectionStrings["hospital"].ConnectionString;
@@ -237,23 +235,168 @@ namespace TempHospitalApplication
 
                 sqlConnection.Open();
 
-                //// Try SqlCommand ExecuteScalar()
-                //var sqlSelectCommandText = "Select Name from Person where IdPerson=1";
-                //using (var sqlSelectCommand = new SqlCommand(sqlSelectCommandText, sqlConnection))
-                //{
-                //    Console.WriteLine(sqlSelectCommand.ExecuteScalar());
-                //}
+                #region Delete Table
+
+                using (var sqlComand = new SqlCommand("Drop table Phone", sqlConnection))
+                {
+                    sqlComand.ExecuteNonQuery();
+                }
+                using (var sqlComand = new SqlCommand("Drop table TestTable", sqlConnection))
+                {
+                    sqlComand.ExecuteNonQuery();
+                }
+
+                #endregion
+
+                #region Creation of Tables
+                //Create table TestTable
+                var sqlCommandText =
+                        "CREATE TABLE TestTable(Id bigint identity(1,1) primary key, Name varchar(50) not null)";
+                using (var sqlCommand = new SqlCommand(sqlCommandText, sqlConnection))
+                {
+                    sqlCommand.ExecuteNonQuery();
+                    Console.WriteLine("S-a creat tabela TestTable in BD \n");
+                }
+
+                //Create table Phone
+                //  sqlCommandText = "CREATE TABLE Phone(Id bigint identity(1,1) primary key, personId bigint not null,prefix int not null)";
+                using (var sqlCommand = new SqlCommand("CREATE TABLE Phone(Id bigint identity(1,1) primary key, personId bigint not null,prefix int not null)", sqlConnection))
+                {
+                    sqlCommand.ExecuteNonQuery();
+                    Console.WriteLine("S-a creat tabela Phone in BD\n");
+                }
+                #endregion
+
+                #region DataAdapter for Phone
+
+                DataSet phoneDataSet = new DataSet();
+
+                SqlDataAdapter adapterPhone = new SqlDataAdapter();
+
+                //-----------------------   SELECT   -----------------------
+
+                adapterPhone.SelectCommand = new SqlCommand("Select * from Phone",sqlConnection);
+
+                adapterPhone.Fill(phoneDataSet);
+
+                //Console.WriteLine("Informatie din tabelul Phone from DB");
+                foreach (DataRow row in phoneDataSet.Tables[0].Rows)
+                    Console.WriteLine($"{row[0],4} {row[1],4} {row[2],6}");
+                Console.WriteLine();
+                Console.WriteLine("-------   Modificari in Data Set   ------");
+
+                //--------------------   INSERT   ------------------------
+                //Insert new rows in Phone
+                Console.WriteLine("Inseram rinduri in PhoneDataSet\n");
+
+                DataRow newRow = phoneDataSet.Tables[0].NewRow();
+                newRow[0] = phoneDataSet.Tables[0].Rows.Count + 1;
+                newRow[1] = 1;
+                newRow[2] = 1;
+                phoneDataSet.Tables[0].Rows.Add(newRow);
+                newRow = phoneDataSet.Tables[0].NewRow();
+                newRow[0] = phoneDataSet.Tables[0].Rows.Count + 1;
+                newRow[1] = 2;
+                newRow[2] = 2;
+                phoneDataSet.Tables[0].Rows.Add(newRow);
+                newRow = phoneDataSet.Tables[0].NewRow();
+                newRow[0] = phoneDataSet.Tables[0].Rows.Count + 1;
+                newRow[1] = 3;
+                newRow[2] = 4;
+                phoneDataSet.Tables[0].Rows.Add(newRow);
+                newRow = phoneDataSet.Tables[0].NewRow();
+                newRow[0] = phoneDataSet.Tables[0].Rows.Count + 1;
+                newRow[1] = 4;
+                newRow[2] = 5;
+                phoneDataSet.Tables[0].Rows.Add(newRow);
+
+                Console.WriteLine("phoneDataSet dupa adaugarea rindurilor");
+                foreach (DataRow row in phoneDataSet.Tables[0].Rows)
+                    Console.WriteLine($"{row[0],4} {row[1],4} {row[2],6}");
+                Console.WriteLine();
+
+                //Setam InsertCommand pentru adapterPhone
+                string sqlInsertCommandText = "Insert into Phone values (@IdPerson,@Prefix)";
+                SqlCommand sqlInsertCommand = new SqlCommand(sqlInsertCommandText, sqlConnection);
+                sqlInsertCommand.Parameters.Add("@IdPerson", SqlDbType.BigInt, Int32.MaxValue, "personId");
+                sqlInsertCommand.Parameters.Add("@Prefix", SqlDbType.Int, Int32.MaxValue, "prefix");
+
+                adapterPhone.InsertCommand = sqlInsertCommand;
 
 
-                ////Create table TestTable
-                //var sqlCommandText =
-                //        "CREATE TABLE TestTable(Id bigint identity(1,1) primary key, Name varchar(50) not null)";
-                //using (var sqlCommand = new SqlCommand(sqlCommandText,sqlConnection))
-                //{
-                //    var rez = sqlCommand.ExecuteNonQuery();
-                //    Console.WriteLine($"sqlCommand.ExecuteNonQuery() return the value {rez}");
-                //}
+                //----------------------   UPDATE   ----------------
+                //Setam UpdateCommand pentru adapterPhone 
+                SqlCommand sqlUpdateCommand = new SqlCommand("Update Phone set prefix=@Prefix where id=@Id", sqlConnection);
+                sqlUpdateCommand.Parameters.Add("@Id", SqlDbType.BigInt, Int32.MaxValue, "id");
+                sqlUpdateCommand.Parameters.Add("@Prefix", SqlDbType.Int, Int32.MaxValue, "prefix");
 
+                adapterPhone.UpdateCommand = sqlUpdateCommand;
+
+                //Modificam DataSet
+                phoneDataSet.Tables[0].Rows[1]["prefix"] = 666;
+                Console.WriteLine("phoneDataSet dupa modificarea prefixului in rindul 2");
+                foreach (DataRow row in phoneDataSet.Tables[0].Rows)
+                    Console.WriteLine($"{row[0],4} {row[1],4} {row[2],6}");
+
+                adapterPhone.Update(phoneDataSet);
+
+                //----------------------   DELETE   --------------------
+                // Setam DeleteCommand pentru adapterPhone
+                SqlCommand sqlDeleteCommand = new SqlCommand("delete from Phone where id=@id", sqlConnection);
+                sqlDeleteCommand.Parameters.Add("@id", SqlDbType.BigInt, 5, "id");
+
+                adapterPhone.DeleteCommand = sqlDeleteCommand;
+
+                //Stergem rindul 3 cu id = 3
+                Console.WriteLine("\nStergem rindul cu Id=3");
+                phoneDataSet.Tables[0].Rows[2].Delete();
+
+                Console.WriteLine("-----------------------------------------");
+
+                adapterPhone.Update(phoneDataSet);
+
+
+                phoneDataSet.Clear();
+                // adapterPhone.Fill(phoneDataSet);
+
+                DataTable phoneDataTable = new DataTable();
+                adapterPhone.Fill(phoneDataTable);
+                Console.WriteLine("\nInformatie salvata in BD");
+                foreach (DataRow row in phoneDataTable.Rows)
+                    Console.WriteLine($"{row[0],4} {row[1],4} {row[2],6}");
+                Console.WriteLine();
+
+                #endregion
+
+                #region Insert Into MedicalSpecialty
+
+                ////MedicalSpecialty
+                //SqlDataAdapter adapterMedicalSpecialty = new SqlDataAdapter("select * from MedicalSpecialty",sqlConnection);
+                //DataSet medicalSpecialtyDataSet = new DataSet();
+                //adapterMedicalSpecialty.Fill(medicalSpecialtyDataSet);
+
+
+
+                //DataRow newRow = medicalSpecialtyDataSet.Tables[0].NewRow();
+                //newRow[0] = medicalSpecialtyDataSet.Tables[0].Rows.Count + 1;
+                //newRow[1] = "GASTROINTEROLOG";
+                //medicalSpecialtyDataSet.Tables[0].Rows.Add(newRow);
+
+                //foreach (DataRow row in medicalSpecialtyDataSet.Tables[0].Rows)
+                //    Console.WriteLine($"{row[0],4}{row[1],25}");
+
+                //SqlCommand insertCommand = new SqlCommand("insert into MedicalSpecialty (SpecialtyName) values (@SpecialtyName)", sqlConnection);
+                //insertCommand.Parameters.Add("@SpecialtyName", SqlDbType.VarChar, 50, "SpecialtyName");
+
+                //adapterMedicalSpecialty.InsertCommand = insertCommand;
+
+                //adapterMedicalSpecialty.Update(medicalSpecialtyDataSet);
+
+                #endregion
+
+                #region SQL Commands
+
+                //-----------------------------------
                 ////Try ExecuteReader()
                 //var sqlSelectCommandText = "Select * from Phone";
                 //using (var sqlSelectCommand = new SqlCommand(sqlSelectCommandText, sqlConnection))
@@ -268,121 +411,54 @@ namespace TempHospitalApplication
                 //    }
                 //}
 
-                //Query parametrization
+                ////Query parametrization
 
-                var sqlSelectParametrizationText = "select * from Phone where id=@id;";
-                using (var sqlSelectParam = new SqlCommand(sqlSelectParametrizationText, sqlConnection))
-                {
-                    sqlSelectParam.Parameters.Add("@id", SqlDbType.BigInt);
-                    SqlDataReader reader;
-                   
-                        sqlSelectParam.Parameters["@id"].Value = 5;
-                        reader = sqlSelectParam.ExecuteReader();
-
-                        while (reader.Read())
-                        {
-                            long id = (long)reader["id"];
-                            long personId = (long)reader["personId"];
-                            int prefix = (int)reader["prefix"];
-                            Console.WriteLine($"{id,4}{personId,4}{prefix,6}");
-                            //Console.WriteLine($"{(string)reader["id"],4}{(string)reader["idPerson"],4},{(string)reader["prefix"],6}");
-                        }
-
-                    
-                  }
-
-
-                    ////DataTable
-
-                    //    DataTable PhoneTable = new DataTable();
-                    //    DataColumn IdColumn = new DataColumn("Id",typeof(long));
-
-                    //    PhoneTable.Columns.Add(IdColumn);
-                    //    PhoneTable.Columns.Add("IdPerson", typeof(long));
-                    //    PhoneTable.Columns.Add("Prefix", typeof(int));
-
-                    //    DataRow row1 = PhoneTable.NewRow();
-                    //    row1["Id"] = 1;
-                    //    row1["IdPerson"] = 1;
-                    //    row1["Prefix"] = 3;
-                    //    PhoneTable.Rows.Add(row1);
-
-
-                    //???????????????????????????
-                    //Using DataAdapter
-                //    var sqlSelectCommandText = "Select IdPerson,Name,Surname,Birthday from Person";
-                //SqlDataAdapter adapter = new SqlDataAdapter(sqlSelectCommandText, sqlConnection);
-                //DataSet dataSet = new DataSet();
-
-                //adapter.SelectCommand = new SqlCommand(sqlSelectCommandText);
-                //adapter.UpdateCommand = new SqlCommand("insert into TestTable (Name) values(@Name)");
-
-                //adapter.UpdateCommand.Parameters.Add("@Name", SqlDbType.VarChar, 50, "Name");
-                //adapter.Parameters["@Name"] = "Valentin";
-                //dataSet.Tables.Add("PersonTable");  //????????????/
-                 
-                //adapter.Fill(dataSet);
-               
-                ////    adapter.FillSchema(dataSet, SchemaType.Mapped);
-                ////     adapter.Fill(PersonTable);
-
-                //foreach (DataRow row in dataSet.Tables["Table"].Rows)
-                ////DataTable PersonTable = dataSet.Tables["Table"];
-                ////foreach (DataRow row in PersonTable.Rows)
+                //var sqlSelectParametrizationText = "select * from Phone where id=@id;";
+                //using (var sqlSelectParam = new SqlCommand(sqlSelectParametrizationText, sqlConnection))
                 //{
-                //    Console.WriteLine($"{row["IdPerson"],4}{row["Name"],10}{row["Surname"],10}{row["Birthday"],20}");
+                //    sqlSelectParam.Parameters.Add("@id", SqlDbType.BigInt);
+                //    sqlSelectParam.Parameters["@id"].Value = 2;
+
+                //    SqlDataReader reader = sqlSelectParam.ExecuteReader();
+
+                //    while (reader.Read())
+                //    {
+                //        long id = (long)reader["id"];
+                //        long personId = (long)reader["personId"];
+                //        int prefix = (int)reader["prefix"];
+                //        Console.WriteLine($"{id,4}{personId,4}{prefix,6}");
+                //    }
                 //}
 
-                //////------------------------------------
-                ////New row in dataSet
-                //DataRow newRow = dataSet.Tables["Table"].NewRow();
-                //newRow[0] = 8;
-                //newRow[1] = "Balta";
-                //newRow[2] = "Eugen";
-                //newRow[3] = new DateTime(2010, 08, 21);
-                //dataSet.Tables["Table"].Rows.Add(newRow);
+
+                ////DataTable
+
+                //    DataTable PhoneTable = new DataTable();
+                //    DataColumn IdColumn = new DataColumn("Id",typeof(long));
+
+                //    PhoneTable.Columns.Add(IdColumn);
+                //    PhoneTable.Columns.Add("IdPerson", typeof(long));
+                //    PhoneTable.Columns.Add("Prefix", typeof(int));
+
+                //    DataRow row1 = PhoneTable.NewRow();
+                //    row1["Id"] = 1;
+                //    row1["IdPerson"] = 1;
+                //    row1["Prefix"] = 3;
+                //    PhoneTable.Rows.Add(row1);
 
 
-                //foreach (DataRow row in dataSet.Tables["Table"].Rows)
-                ////DataTable PersonTable = dataSet.Tables["Table"];
-                ////foreach (DataRow row in PersonTable.Rows)
-                //{
-                //    Console.WriteLine($"{row["IdPerson"],4}{row["Name"],10}{row["Surname"],10}{row["Birthday"],20}");
-                //}
-
-                //adapter
-                //adapter.Update(dataSet);
-               
-                //???????????????????
-
-                //Create table TestTable and Insert several rows
-
-                //  DataAdapter adapter = new SqlDataAdapter();
-                //  var sqlCommandText =
-                //         "insert into TestTable (Name) values(@Name)";
-                //  SqlCommand insertCommand = new SqlCommand(sqlCommandText, sqlConnection);
-                //  insertCommand.Parameters.Add("@Name", SqlDbType.VarChar, 50, "Name");
-
-
-
-
-
-
-                //  insertCommand.Parameters["@Name"] = "Valentin";
-
-                ////  adapter.
-
-                //   Console.ReadKey();
-
-
+                #endregion
             }
 
+           
 
             Console.ReadKey();
             //  _personManagement.InHospital()
 
             //var updatedPatient = _personManagement.InHospital(DateTime.Now, new Patient("q"));
+            var doc = new Doctor("Doc 1", "SurName 1 ", Gender.M, "", "", TipDoctor.RESUSCITATOR, DateTime.Now, DateTime.Now);
 
+            _repository.Save(doc);
         }
     }
 }

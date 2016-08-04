@@ -7,15 +7,14 @@ namespace Domain
 
     public class Patient : Person, IComparable<Patient>
     {
-
-    //    private static int countPacient = 0;
-
         #region FILDS AND PROPERTIES
+        //    private static int countPacient = 0;
+        public virtual DateTime LastDateInHospital { get; set; }
+        public virtual byte State { get; set; }
+        public virtual Doctor DoctorResponsible { set; get; }
 
-        public Doctor DoctorResponsible  {set; get;}
+        List<SicknessHistory> SickHistories = new List<SicknessHistory>();
 
-List<SicknessHistory> SickHistories= new List<SicknessHistory>();
-       
         #region Static Properties for Sorting
         public static IComparer<Patient> SortByFullName { get; } = new NameComparer();
         //{
@@ -27,19 +26,19 @@ List<SicknessHistory> SickHistories= new List<SicknessHistory>();
         }
         #endregion
         #endregion
+
         #region CONSTRUCTORS
-        public Patient(string name, string surname, Gender gender, DateTime birthD, string adress, string phone,
-                       DateTime? dInHospital):base ( name,  surname,  gender, adress,  phone, birthD)
+        public Patient(long idnp, string name, string surname, Gender gender, DateTime birthD, string adress, string phone,
+                       DateTime? lastDateInHospital, byte state = 0) : base(idnp, name, surname, gender, adress, phone, birthD)
         {
-            if(dInHospital ==null) dInHospital =DateTime.Now;
-            DateInHospital = (DateTime)dInHospital;
-           
-      
+            if (lastDateInHospital == null) LastDateInHospital = DateTime.Now;
+            LastDateInHospital = (DateTime)lastDateInHospital;
+            State = state;
         }
         #endregion
         #region METHODS
         //public void InHospital(DateTime dateIn) => DateInHospital = dateIn;
-        
+
         //public void OutHospital(DateTime dateOut)
         //{
 
@@ -49,12 +48,11 @@ List<SicknessHistory> SickHistories= new List<SicknessHistory>();
         //        return;
 
         //}
-        public override string ToString()=> $"{Name} {Surname}  Data internarii {DateInHospital.Day}.{DateInHospital.Month,2 }.{DateInHospital.Year} Doctor {DoctorResponsible.Name} {DoctorResponsible.Surname}";
-        
+        public override string ToString() => $"{Name} {Surname}  Data internarii {LastDateInHospital.Day}.{LastDateInHospital.Month,2 }.{LastDateInHospital.Year} Doctor {DoctorResponsible.Name} {DoctorResponsible.Surname}";
+
         public void AssignDoctor(Doctor doc)
         {
             DoctorResponsible = doc;
-            //Patient p = this;
             if (doc == null)
                 throw (new ArgumentNullException());
             (doc.ListPatients).Add(this);
@@ -66,9 +64,10 @@ List<SicknessHistory> SickHistories= new List<SicknessHistory>();
             string fullNameObj = other.Name + " " + other.Surname;
             return fullNameThis.CompareTo(fullNameObj);
         }
-        public void Externarea(DateTime dExtrn) => DateOutHospital = dExtrn;
-      //  public void AddSickHistory(SicknessHistory sh) => SickHistories.Add(sh);
-        
+        //        public void Externarea(DateTime dExtrn) => DateOutHospital = dExtrn;
+
+        //  public void AddSickHistory(SicknessHistory sh) => SickHistories.Add(sh);
+
         //public SicknessHistory CreateNewSicknessHistory(Person p, NewSicknessEventArgs arg)
         //{
 

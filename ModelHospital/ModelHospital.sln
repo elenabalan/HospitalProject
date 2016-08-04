@@ -23,6 +23,16 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common.Hospital", "Common.H
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests.Hospital", "..\Tests.Hospital\Tests.Hospital.csproj", "{45CD8351-8643-4529-85C2-31D9D3CD3BCD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Hospital.Mapping", "..\Hospital.Mapping\Hospital.Mapping.csproj", "{46156D9A-1437-4F5F-A441-018286831F97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Interfaces", "Repository.Interfaces\Repository.Interfaces.csproj", "{AAC005E7-1CFF-4DA7-B181-9EE0C7EFB81C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository.Implementation", "Repository.Implementation\Repository.Implementation.csproj", "{710CA94A-8F37-4FFF-B83F-BA8ADE59B080}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation", "Presentation\Presentation.csproj", "{50A69BE3-B7B5-4C5A-9B35-482A8C47558E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernate.Infrastructure", "NHibernate.Infrastructure\NHibernate.Infrastructure.csproj", "{934708CB-55AD-4592-AF7D-A5413306FE92}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -69,6 +79,26 @@ Global
 		{45CD8351-8643-4529-85C2-31D9D3CD3BCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45CD8351-8643-4529-85C2-31D9D3CD3BCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45CD8351-8643-4529-85C2-31D9D3CD3BCD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{46156D9A-1437-4F5F-A441-018286831F97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{46156D9A-1437-4F5F-A441-018286831F97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{46156D9A-1437-4F5F-A441-018286831F97}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{46156D9A-1437-4F5F-A441-018286831F97}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AAC005E7-1CFF-4DA7-B181-9EE0C7EFB81C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AAC005E7-1CFF-4DA7-B181-9EE0C7EFB81C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AAC005E7-1CFF-4DA7-B181-9EE0C7EFB81C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AAC005E7-1CFF-4DA7-B181-9EE0C7EFB81C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{710CA94A-8F37-4FFF-B83F-BA8ADE59B080}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{710CA94A-8F37-4FFF-B83F-BA8ADE59B080}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{710CA94A-8F37-4FFF-B83F-BA8ADE59B080}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{710CA94A-8F37-4FFF-B83F-BA8ADE59B080}.Release|Any CPU.Build.0 = Release|Any CPU
+		{50A69BE3-B7B5-4C5A-9B35-482A8C47558E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{50A69BE3-B7B5-4C5A-9B35-482A8C47558E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{50A69BE3-B7B5-4C5A-9B35-482A8C47558E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{50A69BE3-B7B5-4C5A-9B35-482A8C47558E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{934708CB-55AD-4592-AF7D-A5413306FE92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{934708CB-55AD-4592-AF7D-A5413306FE92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{934708CB-55AD-4592-AF7D-A5413306FE92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{934708CB-55AD-4592-AF7D-A5413306FE92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

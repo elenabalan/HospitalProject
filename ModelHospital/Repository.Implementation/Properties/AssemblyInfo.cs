@@ -5,16 +5,15 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Hospital.Infrastructure")]
+[assembly: AssemblyTitle("Repository.Implementation")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Hospital.Infrastructure")]
+[assembly: AssemblyProduct("Repository.Implementation")]
 [assembly: AssemblyCopyright("Copyright ©  2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-[assembly: InternalsVisibleTo("TempHospitalApplication")]
-
+[assembly: InternalsVisibleTo("Hospital.Infrastructure")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -22,7 +21,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("2409fccb-3db3-49ec-8163-0d7167da0868")]
+[assembly: Guid("710ca94a-8f37-4fff-b83f-ba8ade59b080")]
 
 // Version information for an assembly consists of the following four values:
 //

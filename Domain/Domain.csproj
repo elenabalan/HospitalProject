@@ -50,6 +50,7 @@
     <Compile Include="Delete\Hospital.cs" />
     <Compile Include="ChangeDoctor\NewDoctorQuitArgs.cs" />
     <Compile Include="ChangeDoctor\NewSicknessHistoryArgs.cs" />
+    <Compile Include="Entity.cs" />
     <Compile Include="NameComparer.cs" />
     <Compile Include="Patient.cs" />
     <Compile Include="Person.cs" />

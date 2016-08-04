@@ -48,14 +48,14 @@ select * from Phone where id=3
 begin tran
 
 update Phone set prefix=8
-where id=3
+where id=2
 
 commit tran
 
 --------------   PHANTOM READS   ---------------
 begin transaction
 
-insert into Phone values (4,2,8)
+insert into Phone values (2,8)
 
 --delete from Phone where id=4
 

@@ -118,15 +118,16 @@ select * from Phone where id=3
 SET Transaction isolation level READ COMMITTED
 --Pentru a fixa aceasta problema setam
 --SET Tran isolation level Repeatable read
+
 begin transaction
 
-select * from phone 
-where id=3
+select * from Phone 
+where id=2
 
 waitfor delay '00:00:05'
 
-select * from phone 
-where id=3
+select * from Phone 
+where id=2
 
 commit tran
 
@@ -135,6 +136,7 @@ commit tran
 SET Transaction isolation level READ COMMITTED
 --Pentru a fixa aceasta problema setam
 --SET Tran isolation level SERIALIZABLE
+
 
 begin transaction
 select * from Phone

@@ -2,26 +2,30 @@
 
 namespace Domain
 {
-    
-    public abstract class Person
+
+    public abstract class Person : Entity
     {
 
-        public string Name { get; } = "Default";
+        public virtual long IDNP { get; set; }
+        public virtual string Name { get; } = "Default";
 
-        public string Surname { get; set; }
-        public Gender Gender { get; set; }
-        public DateTime BirthDate { get; set; }
-        public string AdressHome { get; set; }
-        public string PhoneNumber { get; set; }
-        public DateTime DateInHospital { get; set; }
-        public DateTime? DateOutHospital { get; set; }
+        public virtual string Surname { get; set; }
+        public virtual Gender Gender { get; set; }
+        public virtual DateTime BirthDate { get; set; }
+        public virtual string AdressHome { get; set; }
+        public virtual string PhoneNumber { get; set; }
 
         //it is calculable properties with Expression Body Members
-        public int Age => (int)(DateTime.Now - BirthDate).Days / 365;
-        
-        protected Person(string name, string surname, Gender gender,  string adressHome,
+        public virtual int Age => (int)(DateTime.Now - BirthDate).Days / 365;
+
+        protected Person(long idnp, string name, string surname, Gender gender, string adressHome,
             string phoneNumber, DateTime birthDay)
         {
+            if (idnp.ToString().Length != 13)
+            {
+                throw new ArgumentException("Idnp inadmisibil");
+            }
+            IDNP = idnp;
             if (String.IsNullOrEmpty(name)) throw new ArgumentNullException($"{nameof(name)} is null");
             if (String.IsNullOrEmpty(surname)) throw new ArgumentNullException($"{nameof(surname)} is null");
 

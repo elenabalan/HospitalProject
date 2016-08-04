@@ -71,6 +71,14 @@
       <Project>{219c9466-ac71-48e8-8526-8d0defe73d7e}</Project>
       <Name>Factories</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Hospital.Infrastructure\Hospital.Infrastructure.csproj">
+      <Project>{2409fccb-3db3-49ec-8163-0d7167da0868}</Project>
+      <Name>Hospital.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Repository.Interfaces\Repository.Interfaces.csproj">
+      <Project>{AAC005E7-1CFF-4DA7-B181-9EE0C7EFB81C}</Project>
+      <Name>Repository.Interfaces</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
