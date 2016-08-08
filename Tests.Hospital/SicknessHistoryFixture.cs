@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Hospital;
 using NUnit.Framework;
 using Domain;
 using Domain.ChangeDoctor;
@@ -20,16 +21,16 @@ namespace Tests.Hospital
         {
             _patient = new Patient("Pupkin", "Vasile", Gender.M, new DateTime(1987, 4, 8), "Negruzzi, 67", "654789159", new DateTime(2016, 6, 1, 0, 0, 0));
             _doctor = new Doctor(name: "Bordea", surname: "Boris", gender: Gender.M, phone: "123456987", adress: "Stefan cel mare 2",
-                tipDoc: TipDoctor.CHIRURG, birthDay: new DateTime(1983, 05, 09));
+                profession: MedicalSpecialty.CHIRURG, birthDay: new DateTime(1983, 05, 09));
            _doctorActiv = new Doctor(name: "Kilicik", surname: "Tatiana", gender: Gender.F, phone: "128956987",
                     adress: "Stefan cel mare 2",
-                    tipDoc: TipDoctor.CHIRURG, birthDay: new DateTime(1983, 05, 09));
+                    profession: MedicalSpecialty.CHIRURG, birthDay: new DateTime(1983, 05, 09));
 
             _doctorQuit = new Doctor(name: "Bordea", surname: "Boris", gender: Gender.M, phone: "123456987",
                     adress: "Stefan cel mare 2",
-                    tipDoc: TipDoctor.CHIRURG, birthDay: new DateTime(1983, 05, 09));
+                    profession: MedicalSpecialty.CHIRURG, birthDay: new DateTime(1983, 05, 09));
             _doctorNew = new Doctor(surname: "Ana", name: "Albu", gender: Gender.F, adress: "Aleco Russo 3",
-                phone: "77755566", tipDoc: TipDoctor.THERAPIST,
+                phone: "77755566", profession: MedicalSpecialty.THERAPIST,
                 birthDay: new DateTime(1965, 5, 9),
                 dateIn: new DateTime(1980, 08, 09));
         }
@@ -42,7 +43,7 @@ namespace Tests.Hospital
             //Act
             SicknessHistory sicknessHistory = new SicknessHistory("Angina", SicknessStateEnum.ACTIV, _patient, _doctor, null);
             //Assert
-            Assert.AreEqual(sicknessHistory.SicknessDateStart.Date, DateTime.Now.Date);
+            Assert.AreEqual(sicknessHistory.StartDate.Date, DateTime.Now.Date);
         }
 
         [Test]
@@ -56,7 +57,7 @@ namespace Tests.Hospital
             sicknessHistory.CloseSicknessHistory(DateTime.Now);
 
             //Assert
-            Assert.IsNotNull(sicknessHistory.SicknessDateFinish);
+            Assert.IsNotNull(sicknessHistory.FinishDate);
             Assert.AreEqual(sicknessHistory.SicknessState, SicknessStateEnum.OFF);
 
         }

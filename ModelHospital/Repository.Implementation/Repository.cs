@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Domain;
 
 namespace Repository.Implementation
 {
@@ -15,7 +16,7 @@ namespace Repository.Implementation
         protected readonly ISession _session = SessionGenerator.Instance.GetSession();
 
 
-        public void Save<TEntity>(TEntity entity) where TEntity : global::Domain.Entity
+        public void Save<TEntity>(TEntity entity) where TEntity : Entity
         {
             using (ITransaction transaction = _session.BeginTransaction())
             {
@@ -23,7 +24,8 @@ namespace Repository.Implementation
                 transaction.Commit();
             }
         }
-        public void Delete<TEntity>(TEntity entity) where TEntity : global::Domain.Entity
+
+        public void Delete<TEntity>(TEntity entity) where TEntity : Entity
         {
             using (ITransaction transaction = _session.BeginTransaction())
             {

@@ -1,4 +1,5 @@
 ﻿using System;
+//using Common.Hospital;
 using Domain;
 
 namespace Factories
@@ -18,24 +19,24 @@ namespace Factories
         }
 
         public static PersonFactory Instance => instance;
-        public Doctor CreateDoctor(string name, string surname, Gender gender, string adressHome,
-            string phoneNumber, DateTime birthDay, TipDoctor tipDoc, DateTime? dateIn = null )
-        {
+        //public Doctor CreateDoctor(string name, string surname, Gender gender, string adressHome,
+        //    string phoneNumber, DateTime birthDay, MedicalSpecialty tipDoc, DateTime? dateIn = null )
+        //{
            
-            if ((DateTime.Today - birthDay).Days / 365 < 18)
-            {
-               // Console.WriteLine("Persoana e minora si nu poate fi incadrata in cimpul muncii");
-                throw new ArgumentException($"Persoana {name} {surname} e minora si nu poate fi incadrata in cimpul muncii") ;
+        //    if ((DateTime.Today - birthDay).Days / 365 < 18)
+        //    {
+        //       // Console.WriteLine("Persoana e minora si nu poate fi incadrata in cimpul muncii");
+        //        throw new ArgumentException($"Persoana {name} {surname} e minora si nu poate fi incadrata in cimpul muncii") ;
                 
-            }
-            return new Doctor(name: name, surname: surname, gender: gender, adress: adressHome, phone: phoneNumber,
-                    tipDoc: tipDoc, birthDay: birthDay, dateIn: dateIn);
+        //    }
+        //    return new Doctor(name: name, surname: surname, gender: gender, adress: adressHome, phone: phoneNumber,
+        //            profession: tipDoc, birthDay: birthDay, dateIn: dateIn);
 
-        }
-        public  Patient CreatePatient(string name, string surname, Gender gender, string adressHome, string phoneNumber, DateTime birthDay,
-             DateTime? dateIn = null)
-        {
-            return new Patient(name, surname, gender, birthDay, adressHome, phoneNumber, dateIn);
-        }
+        //}
+        //public  Patient CreatePatient(string name, string surname, Gender gender, string adressHome, string phoneNumber, DateTime birthDay,
+        //     DateTime? dateIn = null)
+        //{
+        //    return new Patient(name, surname, gender, birthDay, adressHome, phoneNumber, dateIn);
+        //}
     }
 }

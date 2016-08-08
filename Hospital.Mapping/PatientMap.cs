@@ -12,7 +12,10 @@ namespace Hospital.Mapping
     {
         public PatientMap()
         {
-           // Map(x => x.DateInHospital);
+            References(x => x.DoctorResponsible);
+            Map(x => x.LastDateInHospital).Not.Nullable();
+            Map(x => x.State).Not.Nullable();
+            HasMany(x => x.SickHistories).Inverse();
         }
     }
 }

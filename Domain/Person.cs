@@ -1,4 +1,5 @@
 ﻿using System;
+using Common.Hospital;
 
 namespace Domain
 {
@@ -7,7 +8,7 @@ namespace Domain
     {
 
         public virtual long IDNP { get; set; }
-        public virtual string Name { get; } = "Default";
+        public virtual string Name { get; set; } = "Default";
 
         public virtual string Surname { get; set; }
         public virtual Gender Gender { get; set; }
@@ -38,5 +39,9 @@ namespace Domain
 
         }
 
+        [Obsolete]
+        protected Person()
+        {
+        }
     }
 }

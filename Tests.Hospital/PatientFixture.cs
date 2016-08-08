@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Hospital;
 using Domain;
 using NUnit.Framework.Internal;
 using NUnit.Framework;
@@ -51,7 +52,7 @@ namespace Tests.Hospital
         {
             //Arrange
             Doctor doctor = new Doctor(name: "Bordea", surname: "Boris", gender: Gender.M, phone: "123456987", adress: "Stefan cel mare 2",
-                tipDoc: TipDoctor.CHIRURG, birthDay: new DateTime(1983, 05, 09));
+                profession: MedicalSpecialty.CHIRURG, birthDay: new DateTime(1983, 05, 09));
             //Act
             _patient.AssignDoctor(doctor);
             //Assert
@@ -73,7 +74,7 @@ namespace Tests.Hospital
         {
             //Arrange
             Doctor doctor = new Doctor(name: "Bordea", surname: "Boris", gender: Gender.M, phone: "123456987", adress: "Stefan cel mare 2",
-                tipDoc: TipDoctor.CHIRURG, birthDay: new DateTime(1983, 05, 09));
+                profession: MedicalSpecialty.CHIRURG, birthDay: new DateTime(1983, 05, 09));
             //Act
             _patient.AssignDoctor(doctor);
             //Assert

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Hospital;
+
+//using Common.Hospital;
 
 namespace Domain
 {
@@ -30,8 +33,8 @@ namespace Domain
             //if (String.IsNullOrEmpty(surname)) throw new ArgumentNullException($"{nameof(surname)} is null");
         }
 
-        public abstract Person Create(string name, string surname, Gender gender, string adressHome,
-            string phoneNumber, DateTime birthDay, TipDoctor? tipDoc = null,  DateTime? dateIn = null );
+     //   public abstract Person Create(string name, string surname, Gender gender, string adressHome,
+       //     string phoneNumber, DateTime birthDay, MedicalSpecialty? tipDoc = null,  DateTime? dateIn = null );
 
     }
 }

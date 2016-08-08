@@ -12,7 +12,10 @@ namespace Hospital.Mapping
     {
         public DoctorMap()
         {
-            Map(x => x.TipDoctor);
+            References(x => x.Profession).Not.Nullable();
+            Map(x => x.DateOfStart).Not.Nullable();
+            Map(x => x.ProfessionalGrade).Not.Nullable();
+            HasMany(x => x.ListSikcnessHistories).Inverse();
         }
     }
 }

@@ -1,44 +1,56 @@
 ﻿using System;
+//using Common.Hospital;
 using Domain.ChangeDoctor;
+using Common.Hospital;
+using Domain;
 
 namespace Domain
 {
-    public class SicknessHistory
+    public class SicknessHistory : Entity
     {
-        public string NameSickness { get; }
-        public SicknessStateEnum SicknessState { get; protected set; }
-        public Patient Patient { get; }
-        public Doctor Doctor { get; set; }
-        public DateTime SicknessDateStart { get; } 
-        public DateTime? SicknessDateFinish { get; set; }
+        public virtual Sickness NameSickness { get; set; }
+        //      public virtual SicknessStateEnum SicknessState { get; set; }
+        public virtual Patient Patient { get; }
+        public virtual Doctor Doctor { get; set; }
+        public virtual DateTime StartDate { get; }
+        public virtual DateTime? FinishDate { get; set; }
 
         public static WeakDoctorQuitHandler QuitDocHandler = new WeakDoctorQuitHandler();
-        public SicknessHistory(string nameSickness, SicknessStateEnum sicknessState, Patient pacient, 
+        public SicknessHistory(Sickness nameSickness, Patient pacient,
                                Doctor doctor, DateTime? dateStart = null)
         {
+            //var sickness = new Sickness();
+
+            NameSickness = nameSickness;
             Patient = pacient;
             Doctor = doctor;
-            NameSickness = nameSickness;
-            SicknessState = sicknessState;
-            SicknessDateStart = dateStart ?? DateTime.Now;
+
+            StartDate = dateStart ?? DateTime.Now;
+            //       SicknessState = sicknessState;
             QuitDocHandler.QuitDoc += ChangeDoctors;
         }
-        public void CloseSicknessHistory(DateTime dateClose)
+
+        [Obsolete]
+        protected SicknessHistory()
         {
-            SicknessDateFinish = dateClose;
-            SicknessState = SicknessStateEnum.OFF;
         }
 
-        public void ChangeDoctors(NewDoctorQuitArgs args)
+        public virtual void CloseSicknessHistory(DateTime dateClose)
         {
-            if (Doctor == args .QuitDoctor)
-                Doctor = args .NewDoctor;
+            FinishDate = dateClose;
+            //           SicknessState = SicknessStateEnum.OFF;
+        }
+
+        public virtual void ChangeDoctors(NewDoctorQuitArgs args)
+        {
+            if (Doctor == args.QuitDoctor)
+                Doctor = args.NewDoctor;
         }
 
         public override string ToString() => $"Doctor  {Doctor}  {NameSickness} " +
-                                             $"\n At the moment the sickness is {SicknessState}\n" +
-                                             $" Start sickness date is {SicknessDateStart :d}\n " +
-                                             $"Finish sickness date is {SicknessDateFinish :d}";
-       
+                                             //                 $"\n At the moment the sickness is {SicknessState}\n" +
+                                             $" Start sickness date is {StartDate:d}\n " +
+                                             $"Finish sickness date is {FinishDate:d}";
+
     }
 }

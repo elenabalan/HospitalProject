@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Common.Hospital;
 
 namespace Domain
 {
@@ -10,10 +11,9 @@ namespace Domain
         #region FILDS AND PROPERTIES
         //    private static int countPacient = 0;
         public virtual DateTime LastDateInHospital { get; set; }
-        public virtual byte State { get; set; }
+        public virtual StatePatient State { get; set; }
         public virtual Doctor DoctorResponsible { set; get; }
-
-        List<SicknessHistory> SickHistories = new List<SicknessHistory>();
+        public virtual List<SicknessHistory> SickHistories { get; set; }
 
         #region Static Properties for Sorting
         public static IComparer<Patient> SortByFullName { get; } = new NameComparer();
@@ -29,12 +29,18 @@ namespace Domain
 
         #region CONSTRUCTORS
         public Patient(long idnp, string name, string surname, Gender gender, DateTime birthD, string adress, string phone,
-                       DateTime? lastDateInHospital, byte state = 0) : base(idnp, name, surname, gender, adress, phone, birthD)
+                       DateTime? lastDateInHospital, StatePatient state = StatePatient.IsChronically) : base(idnp, name, surname, gender, adress, phone, birthD)
         {
             if (lastDateInHospital == null) LastDateInHospital = DateTime.Now;
             LastDateInHospital = (DateTime)lastDateInHospital;
             State = state;
         }
+
+        [Obsolete]
+        protected Patient()
+        {
+        }
+
         #endregion
         #region METHODS
         //public void InHospital(DateTime dateIn) => DateInHospital = dateIn;
@@ -50,15 +56,15 @@ namespace Domain
         //}
         public override string ToString() => $"{Name} {Surname}  Data internarii {LastDateInHospital.Day}.{LastDateInHospital.Month,2 }.{LastDateInHospital.Year} Doctor {DoctorResponsible.Name} {DoctorResponsible.Surname}";
 
-        public void AssignDoctor(Doctor doc)
+        public virtual void AssignDoctor(Doctor doc)
         {
             DoctorResponsible = doc;
             if (doc == null)
                 throw (new ArgumentNullException());
-            (doc.ListPatients).Add(this);
+           // (doc.ListPatients).Add(this);
         }
 
-        public int CompareTo(Patient other)
+        public virtual int CompareTo(Patient other)
         {
             string fullNameThis = this.Name + " " + this.Surname;
             string fullNameObj = other.Name + " " + other.Surname;

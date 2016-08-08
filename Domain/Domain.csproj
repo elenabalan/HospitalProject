@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Certificate.cs" />
     <Compile Include="DateInComparer.cs" />
     <Compile Include="Delete\CreatePersonInHospital.cs" />
     <Compile Include="Delete\CreatorDoctor.cs" />
@@ -51,15 +52,16 @@
     <Compile Include="ChangeDoctor\NewDoctorQuitArgs.cs" />
     <Compile Include="ChangeDoctor\NewSicknessHistoryArgs.cs" />
     <Compile Include="Entity.cs" />
+    <Compile Include="MedicalSpecialty.cs" />
     <Compile Include="NameComparer.cs" />
     <Compile Include="Patient.cs" />
     <Compile Include="Person.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Delete\Sickness.cs" />
+    <Compile Include="Sickness.cs" />
     <Compile Include="SicknessHistory.cs" />
-    <Compile Include="Staff.cs" />
     <Compile Include="Delete\Symptom.cs" />
     <Compile Include="ChangeDoctor\WeakDoctorQuitHandler.cs" />
+    <Compile Include="SicknessSymptom.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ModelHospital\Common.Hospital\Common.Hospital.csproj">

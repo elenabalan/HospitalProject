@@ -6,13 +6,13 @@ namespace Domain.ChangeDoctor
     {
         public string NameSickness { get; }
         public DateTime StartDate { get; }
-        public SicknessStateEnum State { get; }
+   //     public SicknessStateEnum State { get; }
 
-        public NewStartSicknessEventArgs(string nameSickness, DateTime startDate, SicknessStateEnum _state)
+        public NewStartSicknessEventArgs(string nameSickness, DateTime startDate)
         {
             NameSickness = nameSickness;
             StartDate = startDate;
-            State = _state;
+  //          State = _state;
         }
 
     }

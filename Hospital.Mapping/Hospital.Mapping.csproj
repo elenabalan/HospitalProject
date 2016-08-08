@@ -52,12 +52,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CertificateMap.cs" />
     <Compile Include="DoctorMap.cs" />
     <Compile Include="EntityMap.cs" />
+    <Compile Include="MedicalSpecialtyMap.cs" />
     <Compile Include="PatientMap.cs" />
     <Compile Include="PersonMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StaffMap.cs" />
+    <Compile Include="SicknessHistoryMap.cs" />
+    <Compile Include="SicknessMap.cs" />
+    <Compile Include="SicknessSymptomMap.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Domain\Domain.csproj">

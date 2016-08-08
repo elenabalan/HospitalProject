@@ -54,9 +54,9 @@ namespace Utils
                 Console.WriteLine($"Inscriem info despre istoria bolii {sickHist.NameSickness } a pacientului {sickHist.Patient.Name} {sickHist.Patient.Surname} in txt file");
                 sw.WriteLine($"Pacient {sickHist.Patient.Name} {sickHist.Patient.Surname}");
                 sw.WriteLine($"Sickness name is {sickHist.NameSickness}");
-                sw.WriteLine($"Starea maladiei {sickHist.SicknessState}");
-                sw.WriteLine($"Data internarii {sickHist.SicknessDateStart}");
-                sw.WriteLine($"Data externarii { sickHist.SicknessDateFinish}");
+       //         sw.WriteLine($"Starea maladiei {sickHist.SicknessState}");
+                sw.WriteLine($"Data internarii {sickHist.StartDate}");
+                sw.WriteLine($"Data externarii { sickHist.FinishDate}");
                 sw.WriteLine($"Doctor {sickHist.Doctor.Name} {sickHist.Doctor.Surname}");
             }
 
@@ -70,9 +70,9 @@ namespace Utils
                 Console.WriteLine($"Inscriem info codata in UTF8 despre istoria bolii {sickHist.NameSickness } a pacientului {sickHist.Patient.Name} {sickHist.Patient.Surname} in txt file");
                 sw.WriteLine($"Pacient {sickHist.Patient.Name} {sickHist.Patient.Surname}", Encoding.UTF8);
                 sw.WriteLine($"Sickness name is {sickHist.NameSickness}", Encoding.UTF8);
-                sw.WriteLine($"Starea maladiei {sickHist.SicknessState}", Encoding.UTF8);
-                sw.WriteLine($"Data internarii {sickHist.SicknessDateStart}", Encoding.UTF8);
-                sw.WriteLine($"Data externarii { sickHist.SicknessDateFinish}", Encoding.UTF8);
+       //         sw.WriteLine($"Starea maladiei {sickHist.SicknessState}", Encoding.UTF8);
+                sw.WriteLine($"Data internarii {sickHist.StartDate}", Encoding.UTF8);
+                sw.WriteLine($"Data externarii { sickHist.FinishDate}", Encoding.UTF8);
                 sw.WriteLine($"Doctor {sickHist.Doctor.Name} {sickHist.Doctor.Surname}", Encoding.UTF8);
             }
         }
@@ -84,9 +84,9 @@ namespace Utils
                 Console.WriteLine($"Inscriem info codata in ASCII despre istoria bolii {sickHist.NameSickness } a pacientului {sickHist.Patient.Name} {sickHist.Patient.Surname} in txt file");
                 sw.WriteLine($"Pacient {sickHist.Patient.Name} {sickHist.Patient.Surname}",Encoding .ASCII);
                 sw.WriteLine($"Sickness name is {sickHist.NameSickness}", Encoding.ASCII);
-                sw.WriteLine($"Starea maladiei {sickHist.SicknessState}", Encoding.ASCII);
-                sw.WriteLine($"Data internarii {sickHist.SicknessDateStart}", Encoding.ASCII);
-                sw.WriteLine($"Data externarii { sickHist.SicknessDateFinish}", Encoding.ASCII);
+   //             sw.WriteLine($"Starea maladiei {sickHist.SicknessState}", Encoding.ASCII);
+                sw.WriteLine($"Data internarii {sickHist.StartDate}", Encoding.ASCII);
+                sw.WriteLine($"Data externarii { sickHist.FinishDate}", Encoding.ASCII);
                 sw.WriteLine($"Doctor {sickHist.Doctor.Name} {sickHist.Doctor.Surname}", Encoding.ASCII);
             };
         }
