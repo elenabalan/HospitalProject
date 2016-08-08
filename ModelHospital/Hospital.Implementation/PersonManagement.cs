@@ -14,13 +14,13 @@ namespace Hospital.Implementation
        
         public Person InHospital(DateTime dateIn, Person person)
         {
-            person.DateInHospital = dateIn;
+     //       person.DateInHospital = dateIn;
             return person;
         }
 
         public Person OutHospital(DateTime dateOut, Person person)
         {
-            person.DateInHospital = dateOut;
+  //          person.DateInHospital = dateOut;
             return person;
         }
     }

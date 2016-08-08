@@ -10,9 +10,9 @@ namespace Domain
     {
         public virtual Sickness NameSickness { get; set; }
         //      public virtual SicknessStateEnum SicknessState { get; set; }
-        public virtual Patient Patient { get; }
-        public virtual Doctor Doctor { get; set; }
-        public virtual DateTime StartDate { get; }
+        public virtual Patient Patient { get; set; }
+        public virtual Doctor Doctor { get; protected set; }
+        public virtual DateTime StartDate { get; set; }
         public virtual DateTime? FinishDate { get; set; }
 
         public static WeakDoctorQuitHandler QuitDocHandler = new WeakDoctorQuitHandler();

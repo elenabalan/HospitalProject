@@ -11,7 +11,7 @@ namespace Hospital.Mapping
     {
         public SicknessMap()
         {
-            Map(x => x.SicknessName).Not.Nullable();
+            Map(x => x.SicknessName).Not.Nullable().Unique();
             HasMany(x => x.SicknessSymptoms);
         }
     }

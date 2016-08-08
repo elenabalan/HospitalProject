@@ -11,7 +11,8 @@ namespace Hospital.Mapping
     {
         public MedicalSpecialtyMap()
         {
-            Map(x => x.MedicalSpecialtyName).Not.Nullable();
+          
+            Map(x => x.MedicalSpecialtyName).Not.Nullable().Unique();
             Map(x => x.Level).Not.Nullable();
             Map(x => x.MinimumExperiencePeriod).Not.Nullable();
         }

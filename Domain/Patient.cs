@@ -13,7 +13,7 @@ namespace Domain
         public virtual DateTime LastDateInHospital { get; set; }
         public virtual StatePatient State { get; set; }
         public virtual Doctor DoctorResponsible { set; get; }
-        public virtual List<SicknessHistory> SickHistories { get; set; }
+        public virtual IList<SicknessHistory> SickHistories { get; set; }
 
         #region Static Properties for Sorting
         public static IComparer<Patient> SortByFullName { get; } = new NameComparer();

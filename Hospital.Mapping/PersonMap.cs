@@ -12,7 +12,7 @@ namespace Hospital.Mapping
     {
         public PersonMap()
         {
-            Map(x => x.IDNP).Not.Nullable();
+            Map(x => x.IDNP).Not.Nullable().Unique();
             Map(x => x.Name).Not.Nullable();
             Map(x => x.Surname).Not.Nullable();
             Map(x => x.BirthDate).Not.Nullable();

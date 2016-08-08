@@ -12,7 +12,7 @@ namespace Hospital.Mapping
         public CertificateMap()
         {
             References(x => x.Doctor).Not.Nullable();
-            Map(x => x.CertificateNumber).Not.Nullable();
+            Map(x => x.CertificateNumber).Not.Nullable().Unique();
             Map(x => x.DataOfReceiving).Not.Nullable();
             References(x => x.Specialty).Not.Nullable();
             Map(x => x.ValidFor).Not.Nullable();

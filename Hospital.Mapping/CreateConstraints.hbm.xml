@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+  assembly="Hospital.Mapping"
+  namespace="Hospital.Mapping">
+  <database-object>
+    <create>
+      ALTER TABLE dbo.Person WITH CHECK
+      ADD CONSTRAINT CK_Birthday CHECK(getdate() > [BirthDate])
+
+      ALTER TABLE dbo.SicknessHistory WITH CHECK
+      ADD CONSTRAINT CK_FinishDate CHECK([FinishDate] IS NOT NULL AND ([FinishDate] > [StartDate]) OR [FinishDate] IS NULL)
+    </create>
+    <drop>
+    </drop>
+  </database-object>
+</hibernate-mapping>

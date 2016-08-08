@@ -11,7 +11,7 @@ namespace Domain
     {
         public virtual string SicknessName { get; set; }
 
-        public virtual List<SicknessSymptom> SicknessSymptoms { get; set; }
+        public virtual IList<SicknessSymptom> SicknessSymptoms { get; set; }
         //new List<string> { "ANGINA", "APENDICITA", "CATARACTA", "GASTRITA", "OTITA", "VARICEL"};
 
         

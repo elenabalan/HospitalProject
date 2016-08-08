@@ -11,7 +11,7 @@ using Domain;
 
 namespace Repository.Implementation
 {
-    public class Repository : IRepository
+    public class BaseRepository : IRepository
     {
         protected readonly ISession _session = SessionGenerator.Instance.GetSession();
 
@@ -35,5 +35,18 @@ namespace Repository.Implementation
         }
 
 
+        public void Update<TEntity>(TEntity entity) where TEntity : Entity
+        {
+            using (ITransaction transaction = _session.BeginTransaction())
+            {
+                _session.Update(entity);
+                transaction.Commit();
+            }
+        }
+
+        public TEntity Get<TEntity>(long id) where TEntity : Entity
+        {
+            return _session.Get<TEntity>(id);
+        }
     }
 }

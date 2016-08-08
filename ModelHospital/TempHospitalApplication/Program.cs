@@ -10,6 +10,7 @@ using Domain;
 using Repository.Interfaces;
 using Hospital.Infrastructure;
 using MedicalSpecialty = Domain.MedicalSpecialty;
+using HibernatingRhinos.Profiler.Appender.NHibernate;
 
 namespace TempHospitalApplication
 {
@@ -22,6 +23,7 @@ namespace TempHospitalApplication
         static Program()
         {
             ServiceLocator.RegisterAll();
+            NHibernateProfiler.Initialize();
             _repository = ServiceLocator.Resolver<IRepository>();
         }
 
@@ -233,13 +235,20 @@ namespace TempHospitalApplication
 
         static void Main(string[] args)
         {
-          
-            var profession = new MedicalSpecialty("REANIMATOLOG", DificultyLevel.HARD, 3 * 365);
+            var repozitory = ServiceLocator.Resolver<IRepository>();
+            var profession = repozitory.Get<MedicalSpecialty>(10010);
 
-            _repository.Save(profession);
-            var doc = new Doctor(1236547896541, "Doc 1", "SurName 1 ", Gender.M, "", "", profession, DateTime.Now, DateTime.Now,2);
+            //var doc = new Doctor(9236547896581, "Doc 4", "SurName 4 ", Gender.F, "", "", profession, new DateTime(1980,04,25), DateTime.Now,2);
 
-            _repository.Save(doc);
+            //_repository.Save(doc);
+            var repozDoctor = ServiceLocator.Resolver<IRepositoryDoctor>();
+            //var doctor = repozDoctor.Get<Doctor>(15015);
+            repozDoctor.ModifySpecialty(15015, 12012);
+
+            foreach (Doctor doc in repozDoctor.GetDoctorsWithSpecialty(12012))
+                Console.WriteLine($"{doc}");
+
+            Console.ReadKey();
         }
     }
 }

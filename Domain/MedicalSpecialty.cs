@@ -10,11 +10,11 @@ namespace Domain
 {
     public  class MedicalSpecialty : Entity
     {
+       
         public virtual string MedicalSpecialtyName { get; set; }
         public virtual DificultyLevel Level { get; set; }
         public virtual int MinimumExperiencePeriod { get; set; }
 
-//        public List<string> MedicalSpecialtyList = new List<string>() { "PEDIATOR" , "CHIRURG ", "REANIMATOLOG", "LOR", "CARDIOLOG", "GASTROLOG" };
 
         public MedicalSpecialty(string medicalSpecialtyName, DificultyLevel level, int minimumExperiencePeriod)
         {

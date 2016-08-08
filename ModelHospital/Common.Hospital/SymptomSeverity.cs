@@ -7,8 +7,8 @@ namespace Common.Hospital
         [Description("LETAL")]
         LETAL = 1,
         [Description("GRAVE")]
-        GRAVE,
+        GRAVE = 2,
         [Description("LIGHT")]
-        LIGHT
+        LIGHT = 3
     }
 }

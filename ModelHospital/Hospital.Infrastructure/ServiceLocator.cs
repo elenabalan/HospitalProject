@@ -9,17 +9,20 @@ using System.Threading.Tasks;
 
 namespace Hospital.Infrastructure
 {
-    class ServiceLocator
+    public class ServiceLocator
     {
         static readonly IKernel Kernel = new StandardKernel();
         public static void RegisterAll()
         {
-            Kernel.Bind<IRepository>().To<Repository.Implementation.Repository>();
+            Kernel.Bind<IRepository>().To<BaseRepository>();
+            Kernel.Bind<IRepositoryDoctor>().To<RepositoryDoctor>();
            
         }
         public static T Resolver<T>()
         {
             return Kernel.Get<T>();
         }
+
+     
     }
 }

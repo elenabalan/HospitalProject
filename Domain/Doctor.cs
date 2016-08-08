@@ -18,7 +18,7 @@ namespace Domain
         public virtual DateTime DateOfStart { get; set; }
         public virtual int ProfessionalGrade { get; set; }
 
-        public  virtual List<SicknessHistory> ListSikcnessHistories {get;set;}
+        public  virtual IList<SicknessHistory> ListSikcnessHistories {get;set;}
 
         #endregion
 
@@ -42,7 +42,7 @@ namespace Domain
 
         #endregion
         #region METHODS
-   //     public override string ToString() => $"\n{Name } {Surname } {Profession } {nameof(BirthDate)} is in {BirthDate:d}. Age is {Age} \nBecame practice in {DateOfStart:d}";
+        public override string ToString() => $"\n{Name } {Surname } {Profession.Id } - {Profession.MedicalSpecialtyName} {nameof(BirthDate)} is in {BirthDate:d}. Age is {Age} \nBecame practice in {DateOfStart:d}";
 
         public virtual void ViewPatients()
         {
