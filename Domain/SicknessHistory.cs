@@ -9,7 +9,7 @@ namespace Domain
     public class SicknessHistory : Entity
     {
         public virtual Sickness NameSickness { get; set; }
-        //      public virtual SicknessStateEnum SicknessState { get; set; }
+        
         public virtual Patient Patient { get; set; }
         public virtual Doctor Doctor { get; protected set; }
         public virtual DateTime StartDate { get; set; }
@@ -17,7 +17,7 @@ namespace Domain
 
         public static WeakDoctorQuitHandler QuitDocHandler = new WeakDoctorQuitHandler();
         public SicknessHistory(Sickness nameSickness, Patient pacient,
-                               Doctor doctor, DateTime? dateStart = null)
+                               Doctor doctor, DateTime? dateStart = null, DateTime? finishDate = null)
         {
             //var sickness = new Sickness();
 
@@ -26,8 +26,12 @@ namespace Domain
             Doctor = doctor;
 
             StartDate = dateStart ?? DateTime.Now;
+            FinishDate = finishDate;
             //       SicknessState = sicknessState;
+     //       Patient.AssignDoctor(Doctor);
+   //         Patient.AddSickHistory(this);
             QuitDocHandler.QuitDoc += ChangeDoctors;
+
         }
 
         [Obsolete]

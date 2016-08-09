@@ -15,7 +15,7 @@ namespace Domain
         //new List<string> { "ANGINA", "APENDICITA", "CATARACTA", "GASTRITA", "OTITA", "VARICEL"};
 
         
-        public Sickness(string sicknessName,List<SicknessSymptom> symptoms)
+        public Sickness(string sicknessName,IList<SicknessSymptom> symptoms)
         {
             if (String.IsNullOrEmpty(sicknessName)) throw new ArgumentNullException();
             SicknessName = sicknessName;

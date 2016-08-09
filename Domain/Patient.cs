@@ -13,7 +13,7 @@ namespace Domain
         public virtual DateTime LastDateInHospital { get; set; }
         public virtual StatePatient State { get; set; }
         public virtual Doctor DoctorResponsible { set; get; }
-        public virtual IList<SicknessHistory> SickHistories { get; set; }
+        public virtual IList<SicknessHistory> SickHistories { get; set; } 
 
         #region Static Properties for Sorting
         public static IComparer<Patient> SortByFullName { get; } = new NameComparer();
@@ -32,8 +32,11 @@ namespace Domain
                        DateTime? lastDateInHospital, StatePatient state = StatePatient.IsChronically) : base(idnp, name, surname, gender, adress, phone, birthD)
         {
             if (lastDateInHospital == null) LastDateInHospital = DateTime.Now;
-            LastDateInHospital = (DateTime)lastDateInHospital;
+            else LastDateInHospital = (DateTime)lastDateInHospital;
             State = state;
+            DoctorResponsible = null;
+            SickHistories = new List<SicknessHistory>();
+
         }
 
         [Obsolete]
@@ -58,11 +61,13 @@ namespace Domain
 
         public virtual void AssignDoctor(Doctor doc)
         {
-            DoctorResponsible = doc;
+            
             if (doc == null)
                 throw (new ArgumentNullException());
-           // (doc.ListPatients).Add(this);
+            DoctorResponsible = doc;
+            // (doc.ListPatients).Add(this);
         }
+       
 
         public virtual int CompareTo(Patient other)
         {
@@ -72,7 +77,7 @@ namespace Domain
         }
         //        public void Externarea(DateTime dExtrn) => DateOutHospital = dExtrn;
 
-        //  public void AddSickHistory(SicknessHistory sh) => SickHistories.Add(sh);
+          public virtual void AddSickHistory(SicknessHistory sh) => SickHistories.Add(sh);
 
         //public SicknessHistory CreateNewSicknessHistory(Person p, NewSicknessEventArgs arg)
         //{

@@ -15,7 +15,7 @@ namespace Hospital.Mapping
             References(x => x.DoctorResponsible);
             Map(x => x.LastDateInHospital).Not.Nullable();
             Map(x => x.State).Not.Nullable();
-            HasMany(x => x.SickHistories).Inverse();
+            HasMany(x => x.SickHistories).Cascade.SaveUpdate().Inverse();
         }
     }
 }

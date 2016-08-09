@@ -12,7 +12,7 @@ namespace Hospital.Mapping
     {
         protected EntityMap()
         {
-            Id(x => x.Id).GeneratedBy.HiLo("1000");
+            Id(x => x.Id).GeneratedBy.HiLo("50");
 
             DynamicUpdate();
         }

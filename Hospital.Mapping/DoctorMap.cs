@@ -15,7 +15,7 @@ namespace Hospital.Mapping
             References(x => x.Profession).Not.Nullable().Cascade.All();
             Map(x => x.DateOfStart).Not.Nullable();
             Map(x => x.ProfessionalGrade).Not.Nullable();
-            HasMany(x => x.ListSikcnessHistories).Inverse();
+            HasMany(x => x.ListSikcnessHistories).Inverse().Cascade.SaveUpdate();
         }
     }
 }

@@ -35,12 +35,12 @@ namespace Hospital.Infrastructure
                                                                                         builder.Database("HospitalProject")
                                                                                                .Server(@"MDDSK40054\SQLEXPRESS")
                                                                                                .TrustedConnection()))
-                                                              //.Mappings(
-                                                              //    x =>
-                                                              //    x.FluentMappings.AddFromAssembly(typeof(EntityMap<>).Assembly))
-                                                              .Mappings(CreateMappingConfiguration);
-                                                            // .ExposeConfiguration(
-                                                              //    cfg => new SchemaUpdate(cfg).Execute(true, true));
+                                                              .Mappings(
+                                                                  x =>
+                                                                  x.FluentMappings.AddFromAssembly(typeof(EntityMap<>).Assembly))
+                                                             // .Mappings(CreateMappingConfiguration);
+                                                             .ExposeConfiguration(
+                                                                  cfg => new SchemaUpdate(cfg).Execute(false, true));
             return configuration.BuildSessionFactory();
         }
         private static void CreateMappingConfiguration(MappingConfiguration mappingConfiguration)

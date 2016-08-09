@@ -33,6 +33,7 @@ namespace Domain
                 DateOfStart = DateTime.Now;
             else DateOfStart = (DateTime)dateOfStart;
             ProfessionalGrade = professionalGrade;
+            ListSikcnessHistories = new List<SicknessHistory>();
         }
 
         [Obsolete]
