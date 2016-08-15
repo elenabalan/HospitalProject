@@ -41,7 +41,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IRepository.cs" />
+    <Compile Include="IRepositoryCertificate.cs" />
     <Compile Include="IRepositoryDoctor.cs" />
+    <Compile Include="IRepositoryPatient.cs" />
+    <Compile Include="IRepositorySicknessHistory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Linq;
 using Common.Hospital;
 using Domain;
+using Domain.Dto;
 
 using Repository.Interfaces;
 using Hospital.Infrastructure;
@@ -223,16 +224,47 @@ namespace TempHospitalApplication
 
         static void Main(string[] args)
         {
-            var repozitory = ServiceLocator.Resolver<IRepository>();
-            //GenerateData(repozitory);
-            //GenerateDataSicknessHistory(repozitory);
+            //GenerateData(repository);
+            //GenerateDataSicknessHistory(repository);
 
-            ////var doctor = repozDoctor.Get<Doctor>(15015);
-            //repozDoctor.ModifySpecialty(15015, 12012);
 
-            //foreach (Doctor doc in repozDoctor.GetDoctorsWithSpecialty(12012))
-            //    Console.WriteLine($"{doc}");
+            var repSickHist = ServiceLocator.Resolver<IRepositorySicknessHistory>();
+            //Console.WriteLine(repSickHist.ClosedSicknessHistoryBeforeData(new DateTime(2014, 01, 01)).Count); 
+            //repSickHist.SicknessHistoriesOrderByDoctors();
+            //repSickHist.SicknessHistoriesClosedOrderByDoctors();
+            //repSickHist.SicknessHistoryWithSpecification();
+            //repSickHist.CountSicknessHistoriesAndShortInfoAboutPersonsInHospital();
+            repSickHist.CorespondencePatientDoctor();
 
+            var repDoc = ServiceLocator.Resolver<IRepositoryDoctor>();
+            //repDoc.ModifySpecialty(15015, 12012);
+            //repDoc.DoctorsWithCertificatesReceivingDateBefore(new DateTime(2012, 12, 31));
+            //repDoc.DoctorsTratePatient(106);
+            //repDoc.DoctorsWithCertificatesReceivingDateBefore(new DateTime(2012,01,01));
+
+            //?????????????/
+            //repDoc.DoctorsWithAllExpiredCertificates();
+            //?????????????
+            //repDoc.ShotInfoDoctor(); 
+            //repDoc.OldestEmployeeDoctor(); 
+            //repDoc.DoctorSicknessHistoryCount(); 
+            //repDoc.DoctorsHavingCertificatesForOneOf2Specialty(52,58);
+            //repDoc.DoctorsWithExperience();
+
+            var repCert = ServiceLocator.Resolver<IRepositoryCertificate>();
+            //repCert.AllCertificatesForDoctor(104);
+            //repCert.CertificatesValidFor3YearRecevedAfter(new DateTime(2010, 12, 31));
+            //??????????repCert.CountExpiredCertificateForDoctor(103);
+            //repCert.CertificateGroupBySpecialty();
+            //repCert.CertificateConformSpacialtyName("TERAPEUT");
+            //repCert.CertificateCountByMedicalSpecialty();  
+            
+
+            var repPat = ServiceLocator.Resolver<IRepositoryPatient>();
+            //repPat.PatientsTraitedByDoctor(104);  
+            //repPat.PatientsSickWith(255);  
+            //repPat.PatientsRepeated();
+            //repPat.ShotInfoPatient();
 
             Console.ReadKey();
         }

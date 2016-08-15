@@ -42,15 +42,16 @@
   <ItemGroup>
     <Compile Include="Certificate.cs" />
     <Compile Include="DateInComparer.cs" />
-    <Compile Include="Delete\CreatePersonInHospital.cs" />
-    <Compile Include="Delete\CreatorDoctor.cs" />
-    <Compile Include="Delete\CreatorPatient.cs" />
-    <Compile Include="Delete\Department.cs" />
     <Compile Include="Doctor.cs" />
-    <Compile Include="Delete\EventFinishSicknessHandler.cs" />
-    <Compile Include="Delete\Hospital.cs" />
     <Compile Include="ChangeDoctor\NewDoctorQuitArgs.cs" />
     <Compile Include="ChangeDoctor\NewSicknessHistoryArgs.cs" />
+    <Compile Include="Dto\CertificateCountGroupeByMedicalSpecialtyDto.cs" />
+    <Compile Include="Dto\DoctorCountSicknessHistoriesDto.cs" />
+    <Compile Include="Dto\DoctorRedusDto.cs" />
+    <Compile Include="Dto\DoctorsWithExperienceDto.cs" />
+    <Compile Include="Dto\PatientDoctorDto.cs" />
+    <Compile Include="Dto\PatientRedusDto.cs" />
+    <Compile Include="Dto\SicknessHistorySpecificateDto.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="MedicalSpecialty.cs" />
     <Compile Include="NameComparer.cs" />
@@ -59,7 +60,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Sickness.cs" />
     <Compile Include="SicknessHistory.cs" />
-    <Compile Include="Delete\Symptom.cs" />
     <Compile Include="ChangeDoctor\WeakDoctorQuitHandler.cs" />
     <Compile Include="SicknessSymptom.cs" />
   </ItemGroup>
@@ -69,6 +69,7 @@
       <Name>Common.Hospital</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

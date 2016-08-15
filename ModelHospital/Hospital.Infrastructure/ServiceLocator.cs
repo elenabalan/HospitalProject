@@ -16,7 +16,10 @@ namespace Hospital.Infrastructure
         {
             Kernel.Bind<IRepository>().To<BaseRepository>();
             Kernel.Bind<IRepositoryDoctor>().To<RepositoryDoctor>();
-           
+            Kernel.Bind<IRepositoryCertificate>().To<RepositoryCertificate>();
+            Kernel.Bind<IRepositorySicknessHistory>().To<RepositorySicknessHistory>();
+            Kernel.Bind<IRepositoryPatient>().To<RepositoryPatient>();
+
         }
         public static T Resolver<T>()
         {

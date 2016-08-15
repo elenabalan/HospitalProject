@@ -11,10 +11,10 @@ namespace Hospital.Mapping
     {
         public SicknessHistoryMap()
         {
-            References(x => x.NameSickness); 
-            References(x => x.Doctor);
-            References(x => x.Patient);
-            Map(x => x.StartDate);
+            References(x => x.NameSickness).Not.Nullable(); 
+            References(x => x.Doctor).Not.Nullable();
+            References(x => x.Patient).Not.Nullable();
+            Map(x => x.StartDate).Not.Nullable();
             Map(x => x.FinishDate);
         }
     }

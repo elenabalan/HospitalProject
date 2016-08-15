@@ -53,8 +53,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository.cs" />
+    <Compile Include="BaseRepository.cs" />
+    <Compile Include="RepositoryCertificate.cs" />
     <Compile Include="RepositoryDoctor.cs" />
+    <Compile Include="RepositoryPatient.cs" />
+    <Compile Include="RepositorySicknessHistory.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Domain\Domain.csproj">
