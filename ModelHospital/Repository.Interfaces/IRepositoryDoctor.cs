@@ -22,7 +22,7 @@ namespace Repository.Interfaces
         //Doctorii care au certificatele expirate
         IList<Doctor> DoctorsWithAllExpiredCertificates();
 
-        IList<DoctorRedusDto> ShotInfoDoctor();
+        IList<DoctorRedusDto> ShortInfoDoctor();
 
         Doctor OldestEmployeeDoctor();
 

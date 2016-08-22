@@ -19,6 +19,9 @@ using Domain.Dto;
 //----------            Write Queries using queryover with different Subquery types – WhereProperty Exists, In, All          ----------------
 //----------            Integrate a SQL function.
 
+//Distinct in SQL
+
+
 namespace Repository.Implementation
 {
     class RepositoryDoctor : BaseRepository, IRepositoryDoctor
@@ -85,7 +88,7 @@ namespace Repository.Implementation
         //===============     AliasToBean  transformer     ==================
         //***************     SELECTSUBQUERY     ***************
         //***************     Integrate a SQL function     ***************
-        public IList<DoctorRedusDto> ShotInfoDoctor()  //Short info + count Certificates
+        public IList<DoctorRedusDto> ShortInfoDoctor()  //Short info + count Certificates
         {
             Doctor doctorAlias = null;
             MedicalSpecialty medicalSpecialtyAlias = null;
@@ -126,13 +129,33 @@ namespace Repository.Implementation
         public IList<DoctorsWithExperienceDto> DoctorsWithExperience()
         {
             SicknessHistory sicknessHistory = null;
+            DoctorsWithExperienceDto doctorWithExperienceDto = null;
 
             var rez = _session.QueryOver<Doctor>()
                .JoinQueryOver(d => d.ListSikcnessHistories, () => sicknessHistory)
                .SelectList(list => list
-                   .SelectGroup(d => d.Id)
-                   .SelectCount(() => sicknessHistory.Id))
+                   .SelectGroup(d => d.Id).WithAlias(()=> doctorWithExperienceDto.IdDoctor)
+                   .SelectCount(() => sicknessHistory.Id).WithAlias(() => doctorWithExperienceDto.CountSicknessHistory))
                .Where(Restrictions.Gt(Projections.Count(Projections.Property(() => sicknessHistory.Id)), 3))
+               .TransformUsing(Transformers.AliasToBean<DoctorsWithExperienceDto>())
+               .List<DoctorsWithExperienceDto>();
+            
+            Doctor doc = null;
+            var rez1 = _session.QueryOver(() => doc)
+               .JoinQueryOver(() => doc.ListSikcnessHistories, () => sicknessHistory)
+               .SelectList(list => list
+                   .SelectGroup(d => d.Id).WithAlias(() => doctorWithExperienceDto.IdDoctor)
+                   .SelectCount(() => sicknessHistory.Id).WithAlias(() => doctorWithExperienceDto.CountSicknessHistory))
+               .Where(Restrictions.Between(Projections.Group(() => doc.Id), 101, 104))
+               .TransformUsing(Transformers.AliasToBean<DoctorsWithExperienceDto>())
+               .List<DoctorsWithExperienceDto>();
+
+            var rez2 = _session.QueryOver(() => doc)
+               .JoinQueryOver(() => doc.ListSikcnessHistories, () => sicknessHistory)
+               .SelectList(list => list
+                   .SelectGroup(d => d.Id).WithAlias(() => doctorWithExperienceDto.IdDoctor)
+                   .SelectCount(() => sicknessHistory.Id).WithAlias(() => doctorWithExperienceDto.CountSicknessHistory))
+               .Where(Restrictions.Between(Projections.GroupProperty(Projections.Property(() => doc.Id)), 101, 104))
                .TransformUsing(Transformers.AliasToBean<DoctorsWithExperienceDto>())
                .List<DoctorsWithExperienceDto>();
 
@@ -154,6 +177,7 @@ namespace Repository.Implementation
         }
 
         //=============    DistinctRootEntity transformer     ==================
+        //                 Distinct in SQL
         public IList<Doctor> DoctorsTratePatient(long patientId)
         {
             SicknessHistory sicknessHistoryAlias = null;
@@ -171,6 +195,20 @@ namespace Repository.Implementation
                                .Where(() => sicknessHistoryAlias.Patient.Id == patientId)
                                .TransformUsing(Transformers.DistinctRootEntity)
                                .List();
+            //distinct in SQL
+            var rez2 = _session.QueryOver(() => doctorAlias)
+                              .JoinAlias(() => doctorAlias.ListSikcnessHistories, () => sicknessHistoryAlias)
+                              
+                              .Where(() => sicknessHistoryAlias.Patient.Id == patientId)
+                              .Select(Projections.Distinct
+                                (Projections.ProjectionList()
+                                    .Add(Projections.Property(() => doctorAlias.Id))
+                                    .Add(Projections.Property(() => doctorAlias.Name))
+                                    .Add(Projections.Property(() => doctorAlias.Surname))
+                                    ))
+                              .TransformUsing(Transformers.AliasToBean<Doctor>())
+                              .List();
+
             return rez;
         }
 

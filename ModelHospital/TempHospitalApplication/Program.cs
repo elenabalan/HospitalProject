@@ -234,7 +234,7 @@ namespace TempHospitalApplication
             //repSickHist.SicknessHistoriesClosedOrderByDoctors();
             //repSickHist.SicknessHistoryWithSpecification();
             //repSickHist.CountSicknessHistoriesAndShortInfoAboutPersonsInHospital();
-            repSickHist.CorespondencePatientDoctor();
+            //repSickHist.CorespondencePatientDoctor();
 
             var repDoc = ServiceLocator.Resolver<IRepositoryDoctor>();
             //repDoc.ModifySpecialty(15015, 12012);
@@ -263,7 +263,7 @@ namespace TempHospitalApplication
             var repPat = ServiceLocator.Resolver<IRepositoryPatient>();
             //repPat.PatientsTraitedByDoctor(104);  
             //repPat.PatientsSickWith(255);  
-            //repPat.PatientsRepeated();
+            repPat.PatientsRepeated();
             //repPat.ShotInfoPatient();
 
             Console.ReadKey();
