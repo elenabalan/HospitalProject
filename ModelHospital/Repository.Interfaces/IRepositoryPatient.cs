@@ -17,6 +17,7 @@ namespace Repository.Interfaces
         //Pacienti fideli (care se trateaza nu prima oara  sau s-au tratat de >2 ori)
         IList<Patient> PatientsRepeated();
 
-        IList<PatientRedusDto> ShotInfoPatient();
+        IList<PatientRedusDto> ShortInfoPatient();
+        IList<Patient> AllPatients();
     }
 }

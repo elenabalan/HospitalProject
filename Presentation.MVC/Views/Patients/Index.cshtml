@@ -1,0 +1,12 @@
+﻿@model List<Domain.Dto.PatientRedusDto>
+@{
+    ViewBag.Title = "Index";
+}
+    <h2>Patients</h2>
+    @foreach (var patient in Model)
+    {
+        //pot face un table
+
+        <p> <a href="@Url.Action("EditPatient", new { id = patient.IdPatient})">@patient.Name @patient.Surname</a>    @patient.CountSicknessHistories</p>
+
+    }

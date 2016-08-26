@@ -34,5 +34,7 @@ namespace Repository.Interfaces
 
         //Doctori cu experienta (au mai mult de 3 SicknessHistories)
         IList<DoctorsWithExperienceDto> DoctorsWithExperience();
+
+        IList<MedicalSpecialtyForCreationDoctorDto> ListMedicalSpecialtyFoCreationDoctor();
     }
 }

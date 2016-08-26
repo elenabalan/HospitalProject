@@ -22,6 +22,11 @@ namespace Repository.Implementation
 {
     class RepositoryPatient : BaseRepository, IRepositoryPatient
     {
+        public IList<Patient> AllPatients()
+        {
+            return _session.QueryOver<Patient>().List();
+        }
+
         //***************     Using queryover with WhereProperty SOME  (ANY)     ***************
         public IList<Patient> PatientsRepeated()
         {
@@ -88,7 +93,7 @@ namespace Repository.Implementation
         //===============     AliasToBean  transformer     ==================
         //***************     SELECTSUBQUERY     ***************
         //***************     Integrate a SQL function     ***************
-        public IList<PatientRedusDto> ShotInfoPatient()
+        public IList<PatientRedusDto> ShortInfoPatient()
         {
             Patient patient = null;
             SicknessHistory sicknessHistory = null;

@@ -252,5 +252,17 @@ namespace Repository.Implementation
             return null;
         }
 
+        public IList<MedicalSpecialtyForCreationDoctorDto> ListMedicalSpecialtyFoCreationDoctor()
+        {
+            MedicalSpecialtyForCreationDoctorDto msfcd = null;
+            MedicalSpecialty ms = null;
+            var rez = _session.QueryOver(() => ms)
+                .SelectList(list => list
+                .Select(() => ms.Id).WithAlias(() => msfcd.Id)
+                .Select(() => ms.MedicalSpecialtyName).WithAlias(() => msfcd.MedicalSpecialtyName))
+                .TransformUsing(Transformers.AliasToBean<MedicalSpecialtyForCreationDoctorDto>())
+                .List<MedicalSpecialtyForCreationDoctorDto>();
+            return rez;
+        }
     }
 }

@@ -49,6 +49,7 @@
     <Compile Include="Dto\DoctorCountSicknessHistoriesDto.cs" />
     <Compile Include="Dto\DoctorRedusDto.cs" />
     <Compile Include="Dto\DoctorsWithExperienceDto.cs" />
+    <Compile Include="Dto\MedicalSpecialtyForCreationDoctorDto.cs" />
     <Compile Include="Dto\PatientDoctorDto.cs" />
     <Compile Include="Dto\PatientRedusDto.cs" />
     <Compile Include="Dto\SicknessHistorySpecificateDto.cs" />

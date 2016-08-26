@@ -1,0 +1,67 @@
+﻿@model Presentation.MVC.Models.PatientDetailViewModel
+
+@{
+    ViewBag.Title = "DetailsPatient";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details Patient</h2>
+
+<div>
+    @*<h4>PatientDetailViewModel</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IDNP)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IDNP)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Surname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Surname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BirthDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BirthDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdressHome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdressHome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+
+    </dl>
+</div>
+<p>
+   
+    @Html.ActionLink("Back to List", "AboutPatient")
+</p>
