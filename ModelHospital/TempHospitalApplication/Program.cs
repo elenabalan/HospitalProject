@@ -4,9 +4,13 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Configuration;
 using System.Linq;
+using Castle.Windsor;
+using Castle.Windsor.Installer;
 using Common.Hospital;
 using Domain;
 using Domain.Dto;
+
+
 
 using Repository.Interfaces;
 using Hospital.Infrastructure;
@@ -23,9 +27,15 @@ namespace TempHospitalApplication
 
         static Program()
         {
-            ServiceLocator.RegisterAll();
+           
+            var container = new WindsorContainer().Install(FromAssembly.This());
+
+            ServiceLocator.RegisterAll(container.Kernel);
+           
+           
             NHibernateProfiler.Initialize();
-            _repository = ServiceLocator.Resolver<IRepository>();
+
+            _repository = ServiceLocator.Get<IRepository>();
         }
 
         public Program()
@@ -228,7 +238,7 @@ namespace TempHospitalApplication
             //GenerateDataSicknessHistory(repository);
 
 
-            var repSickHist = ServiceLocator.Resolver<IRepositorySicknessHistory>();
+            var repSickHist = ServiceLocator.Get<IRepositorySicknessHistory>();
             //Console.WriteLine(repSickHist.ClosedSicknessHistoryBeforeData(new DateTime(2014, 01, 01)).Count); 
             //repSickHist.SicknessHistoriesOrderByDoctors();
             //repSickHist.SicknessHistoriesClosedOrderByDoctors();
@@ -236,7 +246,7 @@ namespace TempHospitalApplication
             //repSickHist.CountSicknessHistoriesAndShortInfoAboutPersonsInHospital();
             //repSickHist.CorespondencePatientDoctor();
 
-            var repDoc = ServiceLocator.Resolver<IRepositoryDoctor>();
+            var repDoc = ServiceLocator.Get<IRepositoryDoctor>();
             //repDoc.ModifySpecialty(15015, 12012);
             //repDoc.DoctorsWithCertificatesReceivingDateBefore(new DateTime(2012, 12, 31));
             //repDoc.DoctorsTratePatient(106);
@@ -251,7 +261,7 @@ namespace TempHospitalApplication
             //repDoc.DoctorsHavingCertificatesForOneOf2Specialty(52,58);
             //repDoc.DoctorsWithExperience();
 
-            var repCert = ServiceLocator.Resolver<IRepositoryCertificate>();
+            var repCert = ServiceLocator.Get<IRepositoryCertificate>();
             //repCert.AllCertificatesForDoctor(104);
             //repCert.CertificatesValidFor3YearRecevedAfter(new DateTime(2010, 12, 31));
             //??????????repCert.CountExpiredCertificateForDoctor(103);
@@ -260,7 +270,7 @@ namespace TempHospitalApplication
             //repCert.CertificateCountByMedicalSpecialty();  
             
 
-            var repPat = ServiceLocator.Resolver<IRepositoryPatient>();
+            var repPat = ServiceLocator.Get<IRepositoryPatient>();
             //repPat.PatientsTraitedByDoctor(104);  
             //repPat.PatientsSickWith(255);  
             repPat.PatientsRepeated();
